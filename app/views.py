@@ -9,3 +9,6 @@ def about(request):
 
 def deals(request):
     return render(request, 'app/deals.html', {"active": "deals"})
+
+def resources(request):
+    return render(request, 'app/resources.html', {"active": "resources"})

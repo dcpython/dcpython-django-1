@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     url(r'^donor/(?P<secret>[\w\-_]+=?=?=?)$', 'support.views.donor_update', name='donor_update'),
     url(r'^about$', 'app.views.about', name='about'),
     url(r'^deals$', 'app.views.deals', name='deals'),
+    url(r'^resources$', 'app.views.resources', name='resources'),
+    # url(r'^$', 'dcpython.views.home', name='home'),
     # url(r'^dcpython/', include('dcpython.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
