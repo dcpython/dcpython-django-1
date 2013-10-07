@@ -9,6 +9,17 @@ We use **Git version control** and `GitHub <http://www.github.com>`_ for project
 
 We use the `Vagrant <http://www.vagrantup.com>`_ development environment. Vagrant allows us to standardize our development and production environments and makes it easy for everybody to get up and running. Vagrant creates a virtual machine, sets up django, database, and everything, then mirrors and syncs the project source code on both your machine and the vm. That way, you make changes to the code on your machine, the changes are mirrored in the vm. Then you run Django on the VM. Now, you can do local development, but you don't have to set up Django and the Database. Very cool.
 
+Plan
+----
+
+Pages we want to get done by 5pm on Tuesday, October 9th, 2013:
+
+#. Events page
+#. Home page
+#. Donation page
+#. About us
+#. Cool links (resources)
+
 Installation
 ------------
 
