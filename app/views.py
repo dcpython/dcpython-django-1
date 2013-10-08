@@ -12,3 +12,8 @@ def deals(request):
 
 def resources(request):
     return render(request, 'app/resources.html', {"active": "resources"})
+
+def legal(request):
+    #passing the active value, even tho it is not being used
+    return render(request, 'app/legal.html', {"active": "legal"}) 
+
