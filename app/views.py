@@ -17,3 +17,5 @@ def legal(request):
     #passing the active value, even tho it is not being used
     return render(request, 'app/legal.html', {"active": "legal"}) 
 
+def contact(request):
+    return render(request, 'app/contact.html', {'active': 'contact'})

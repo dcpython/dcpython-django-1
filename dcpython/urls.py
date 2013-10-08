@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^deals$', 'app.views.deals', name='deals'),
     url(r'^resources$', 'app.views.resources', name='resources'),
     url(r'^legal$', 'app.views.legal', name='legal'),
+    url(r'^contact$', 'app.views.contact', name='contact'),
     # url(r'^$', 'dcpython.views.home', name='home'),
     # url(r'^dcpython/', include('dcpython.foo.urls')),
 
