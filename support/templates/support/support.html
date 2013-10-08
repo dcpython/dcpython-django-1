@@ -98,7 +98,75 @@
           </div>
         </form>
       </div>
+	  
+	  <div class="payment type">
+		  <form class="form-inline" role="form">
+			  <div class="radio">
+				<label>
+				  <input type="radio" name ="donate source"> Bank
+				</label>
+				<label>
+				  <input type="radio" name ="donate source"> Credit Card
+				</label>
+				<label>
+				  <input type="radio" name ="donate source"> PayPal
+				</label>
+				<label>
+				  <input type="radio" name ="donate source"> Pledge
+				</label>
+			  </div>
+		  </form>
+	  </div>
 
+	  <div class="bank">
+		  <form role="form">
+			<div class="col-lg-12">
+				<h3>Bank</h3>
+			</div>
+			  <div class="form-group">
+				<label for="bankName">Bank Name</label>
+				<input type="text" class="form-control" placeholder="Bank Name" id="bankName" />
+			  </div>
+			  <div class="form-group">
+				<label for="routingNumber">Routing Number</label>
+				<input type="text" class="form-control" placeholder="111111111" id="routing" />
+			  </div>
+			  <div class="form-group">
+				<label for="acctNumber">Account Number</label>
+				<input type="text" class="form-control" placeholder="000000-00" id="account" />
+			  </div>
+			  <div class="form-group">
+				<label for="bankAcctType">Type</label>
+				  <select>
+					  <option value=""> </option>
+					  <option value="checking">Checking</option>
+					  <option value="savings">Savings</option>
+				  </select>
+			  </div>
+			</form>
+          </div>
+		  
+	  <div class="creditCard">
+		  <form role="form">
+			<div class="col-lg-12">
+				<h3>Credit Card</h3>
+			</div>
+			  <div class="form-group">
+				<label for="cardNumber">Card Number</label>
+				<input type="text" class="form-control" placeholder="4111111111111111" id="cardNumber" />
+			  </div>
+			  <div class="form-group">
+				<label for="routingNumber">Expiration</label>
+				<input name="expiration_month" placeholder="1"> / <input name="expiration_year" placeholder="2020">
+			  </div>
+			  <div class="form-group">
+				<label for="acctNumber">Security Code</label>
+				<input type="text" class="form-control" placeholder="123" id="account" />
+			  </div>
+			</form>
+       </div>
+		  
+		  
       <div class="col-lg-4">
         {% csrf_token %}
         {% bootstrap_form form %}
