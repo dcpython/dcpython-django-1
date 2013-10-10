@@ -30,6 +30,10 @@
         </div>
     {% endif %}
 
+    {% if not omit_youtube %}
+        {% youtube_playlist event.name event.start_time %}
+    {% endif %}
+
     <div itemprop="description">
         {% if truncate_description %}
             {{ event.description|truncatewords_html:truncate_description|safe }}

@@ -78,7 +78,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = 'staticfiles' 
+STATIC_ROOT = 'staticfiles'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -183,3 +183,6 @@ if "DATABASE_URL" in os.environ:
     FIXTURE_DIRS = (
        '/vagrant/dcpython/fixtures',
     )
+
+GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY', None)
+YOUTUBE_CHANNEL_ID = os.environ.get('YOUTUBE_CHANNEL_ID', 'UCGQZd1FaRdbZGnOuzh_n9Zg')
