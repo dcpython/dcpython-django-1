@@ -9,3 +9,11 @@
 #events .panel-title time:after {
     content: ")";
 }
+
+.event > h3:first-child {
+    margin-top: 0;
+}
+
+.table time {
+    white-space: nowrap;
+}

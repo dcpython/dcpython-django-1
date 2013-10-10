@@ -1,23 +1,49 @@
 # encoding: utf-8
 
-from django.views.decorators.cache import cache_page
 from django.shortcuts import render
+from django.views.generic.dates import YearArchiveView, MonthArchiveView, DateDetailView
 
-from app.integration.meetup import get_upcoming_events, get_past_events
+from .models import Event
 
 
-@cache_page(3600)  # Cache API results for one hour
 def event_list(request):
-    upcoming = get_upcoming_events()
-    past = get_past_events()
+    upcoming = Event.objects.upcoming()
+    past = Event.objects.past()
+    years = Event.objects.dates('start_time', 'year', order="DESC")
 
-    return render(request, 'events/events.html', {"upcoming": upcoming,
-                                                  "past": past,
-                                                  # Used for navigation styling:
-                                                  "active": "events"})
+    ctx = {"upcoming": upcoming,
+           "past": past,
+           # Used for navigation styling:
+           "active": "events",
+           'archive_years': years}
+
+    return render(request, 'events/event_list.html', ctx)
 
 
-def update(request):
-    """
-    Look up events that have changed on meetup.com and call Models API
-    """
+class EventYearArchiveView(YearArchiveView):
+    queryset = Event.objects.all()
+    date_field = "start_time"
+    make_object_list = True
+    allow_future = True
+
+
+class EventMonthArchiveView(MonthArchiveView):
+    queryset = Event.objects.all()
+    date_field = "start_time"
+    make_object_list = True
+    allow_future = True
+
+
+class EventDetail(DateDetailView):
+    queryset = Event.objects.all()
+    date_field = "start_time"
+    month_format = '%m'
+    allow_future = True
+
+    def get_object(self, queryset=None):
+        qs = queryset if queryset is not None else self.get_queryset()
+
+        return qs.get(slug=self.kwargs['slug'],
+                      start_time__year=self.kwargs['year'],
+                      start_time__month=self.kwargs['month'],
+                      start_time__day=self.kwargs['day'])

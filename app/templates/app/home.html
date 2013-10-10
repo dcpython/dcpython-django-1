@@ -8,6 +8,8 @@
     <meta name="google-site-verification" content="-D4G19_01yEEClDbiK419T2LcK1_bX4THolsbozJleY" />
 {% endblock extra_head %}
 
+{% block breadcrumbs-container %}{% endblock breadcrumbs-container %}
+
 {% block content %}
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="background: white; text-align: center">
@@ -28,16 +30,18 @@
                   <div class="panel panel-default">
                       <div class="panel-heading">
                           <h3 class="panel-title">
-                              <a data-toggle="collapse" data-parent="#events" class="accordion-toggle" href="#event-{{ forloop.counter }}-collapse">
+                              <a href="{{ event.get_absolute_url }}">
                                   {{ event.name }}
                                   <time datetime="{{ event.start_time.isoformat }}">{{ event.start_time|date:"D M dS, P" }}</time>
+                              </a>
+                              <a data-toggle="collapse" data-parent="#events" class="accordion-toggle" href="#event-{{ forloop.counter }}-collapse">
                                   <span class="glyphicon glyphicon-collapse-down"></span>
                               </a>
                           </h3>
                       </div>
                       <div id="event-{{ forloop.counter }}-collapse" class="panel-collapse collapse">
                           <div class="panel-body">
-                              {% display_event event omit_title=True omit_time=True %}
+                              {% display_event event omit_title=True omit_time=True omit_youtube=True %}
                           </div>
                       </div>
                   </div>

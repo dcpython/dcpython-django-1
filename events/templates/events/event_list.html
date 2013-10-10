@@ -1,0 +1,54 @@
+{% extends "app/base.html" %}
+
+{% load events_extras %}
+
+{% block title %}Events{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="active">Events</li>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h1>Events</h1>
+        </div>
+
+        <ul class="nav nav-pills">
+            {% for i in archive_years %}
+                <li>
+                    <a href="{% url 'event-year-archive' year=i.year %}">{{ i.year }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Upcoming Events</h2>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        {% for event in upcoming %}
+                            <tr>
+                                <td>{% format_event_date event.start_time event.end_time %}</td>
+                                <td><a href="{{ event.get_absolute_url }}">{{ event.name }}</a></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h2>Past Events</h2>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        {% for event in past reversed %}
+                            <tr>
+                                <td>{% format_event_date event.start_time event.end_time %}</td>
+                                <td><a href="{{ event.get_absolute_url }}">{{ event.name }}</a></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

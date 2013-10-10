@@ -1,14 +1,9 @@
 from django.shortcuts import get_object_or_404, render
-from django.views.decorators.cache import cache_page
 
-from .integration.meetup import get_upcoming_events
+from events.models import Event
 
-
-# Create your views here.
-
-@cache_page(3600)  # Cache API results for one hour
 def home(request):
-    upcoming = get_upcoming_events(count=3)
+    upcoming = Event.objects.upcoming()[:3]
     return render(request, 'app/home.html', {"active": "home", "upcoming": upcoming})
 
 def about(request):

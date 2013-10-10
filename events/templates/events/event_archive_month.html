@@ -1,0 +1,32 @@
+{% extends "app/base.html" %}
+
+{% load events_extras %}
+
+{% block title %}Events for {{ month|date:"F Y" }} — DCPython{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="{% url 'event-list' %}">Events</a></li>
+    <li><a href="{% url 'event-year-archive' year=month.year %}">{{ month|date:"Y" }}</a></li>
+    <li class="active">{{ month|date:"F" }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h1>Events for {{ month|date:"F Y" }}</h1>
+        </div>
+
+        <table class="table table-striped">
+            <tbody>
+                {% for event in object_list %}
+                    <tr>
+                        <td>{% format_event_date event.start_time event.end_time %}</td>
+                        <td>
+                            {% display_event event omit_time=True %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

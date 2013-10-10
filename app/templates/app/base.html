@@ -38,7 +38,17 @@
       </div>
     </div>
 
-    {% block content %}{% endblock %}
+    {% block breadcrumbs-container %}
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                {% block breadcrumbs %}
+                {% endblock breadcrumbs %}
+            </ol>
+        </div>
+    {% endblock breadcrumbs-container %}
+
+    {% block content %}{% endblock content %}
 
     <div class="container footer">
       <footer>
