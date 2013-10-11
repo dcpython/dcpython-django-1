@@ -1,0 +1,55 @@
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}Title{% endblock %}</title>
+
+    {% block stylesheets %}
+        {% bootstrap_css %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/dcpython.css" type="text/css">
+    {% endblock stylesheets %}
+
+    {% block extra_head %}{% endblock extra_head %}
+</head>
+<body>
+
+    <div class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/" rel="home">DC Python</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li {% if active == "home" %}class="active"{% endif %}><a href="{% url 'home' %}" rel="home">Home</a></li>
+            <li {% if active == "events" %}class="active"{% endif %}><a href="{% url 'events' %}">Events</a></li>
+            <li {% if active == "donate" %}class="active"{% endif %}><a href="{% url 'support' %}">Donate</a></li>
+            <!--<li {% if active == "deals" %}class="active"{% endif %}><a href="/deals">Member Deals</a></li>
+            <li {% if active == "blog" %}class="active"{% endif %}><a href="/blog">Blog</a></li>-->
+            <li {% if active == "resources" %}class="active"{% endif %}><a href="{% url 'resources' %}">Resources</a></li>
+            <li {% if active == "about" %}class="active"{% endif %}><a href="{% url 'about' %}">About Us</a></li>
+            <li {% if active == "contact" %}class="active"{% endif %}><a href="{% url 'contact' %}">Contact Us</a></li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    {% block content %}{% endblock %}
+
+    <div class="container footer">
+      <footer>
+        <p><a rel="me" href="https://twitter.com/dcpython">Follow DC Python on Twitter!</a></p>
+        <p><a href="{% url 'legal' %}">&copy; 2008&ndash;{% now "Y" %}, ZPUGDC, Inc.</a>, a not-for-profit, section 501(c)(3). All rights reserved.</p>
+        <p>Website proudly created by the DC Python community.</p>
+      </footer>
+    </div> <!-- /container -->
+
+    {% block javascript %}
+        {% bootstrap_javascript jquery=True %}
+    {% endblock javascript %}
+</body>
+</html>
