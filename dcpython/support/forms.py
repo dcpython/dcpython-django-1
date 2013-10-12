@@ -1,5 +1,5 @@
+from dcpython.support.models import Donor, DONATION_TYPES
 from django import forms
-from support.models import Donor, DONATION_TYPES
 
 class DonorForm(forms.ModelForm):
     class Meta:

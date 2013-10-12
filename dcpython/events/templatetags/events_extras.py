@@ -1,6 +1,6 @@
 from django import template
 
-from app.integration import youtube
+from dcpython.app.integration import youtube
 
 register = template.Library()
 

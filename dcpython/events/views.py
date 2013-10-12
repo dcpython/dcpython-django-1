@@ -1,9 +1,8 @@
 # encoding: utf-8
 
+from dcpython.events.models import Event
 from django.shortcuts import render
 from django.views.generic.dates import YearArchiveView, MonthArchiveView, DateDetailView
-
-from .models import Event
 
 
 def event_list(request):

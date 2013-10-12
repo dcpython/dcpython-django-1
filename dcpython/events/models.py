@@ -9,7 +9,7 @@ from django.db.models import Q
 from django.utils.text import slugify
 from django.utils.timezone import now
 
-from app.integration.meetup import get_upcoming_events, get_past_events
+from dcpython.app.integration.meetup import get_upcoming_events, get_past_events
 
 
 class Venue(models.Model):

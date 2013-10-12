@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 
-from events.models import Event
+from dcpython.events.models import Event
 
 def home(request):
     upcoming = Event.objects.upcoming()[:3]

@@ -1,11 +1,12 @@
-from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse
-from support.forms import DonorForm, DonationForm
-from support.models import Donor
-from django.template import RequestContext, loader
-from django.conf import settings
-import json
 import balanced
+import json
+
+from dcpython.support.forms import DonorForm, DonationForm
+from dcpython.support.models import Donor
+from django.conf import settings
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render
+from django.template import RequestContext, loader
 
 balanced.configure(settings.BALANCED_SECRET)
 

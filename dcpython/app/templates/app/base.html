@@ -24,14 +24,14 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li {% if PATH_HIERARCHY|length == 0 %}class="active"{% endif %}><a href="/" rel="home">Home</a></li>
-            <li {% if PATH_HIERARCHY.0 == "events" %}class="active"{% endif %}><a href="/events">Events</a></li>
-            <li {% if PATH_HIERARCHY.0 == "donate" %}class="active"{% endif %}><a href="/donate">Donate</a></li>
+            <li {% if PATH_HIERARCHY|length == 0 %}class="active"{% endif %}><a href="{% url 'home' %}" rel="home">Home</a></li>
+            <li {% if PATH_HIERARCHY.0 == "events" %}class="active"{% endif %}><a href="{% url 'event-list' %}">Events</a></li>
+            <li {% if PATH_HIERARCHY.0 == "donate" %}class="active"{% endif %}><a href="{% url 'support' %}">Donate</a></li>
             <!--<li {% if PATH_HIERARCHY.0 == "deals" %}class="active"{% endif %}><a href="/deals">Member Deals</a></li>
             <li {% if PATH_HIERARCHY.0 == "blog" %}class="active"{% endif %}><a href="/blog">Blog</a></li>-->
-            <li {% if PATH_HIERARCHY.0 == "resources" %}class="active"{% endif %}><a href="/resources">Resources</a></li>
-            <li {% if PATH_HIERARCHY.0 == "about" %}class="active"{% endif %}><a href="/about">About Us</a></li>
-            <li {% if PATH_HIERARCHY.0 == "contact" %}class="active"{% endif %}><a href="/contact">Contact Us</a></li>
+            <li {% if PATH_HIERARCHY.0 == "resources" %}class="active"{% endif %}><a href="{% url 'resources' %}">Resources</a></li>
+            <li {% if PATH_HIERARCHY.0 == "about" %}class="active"{% endif %}><a href="{% url 'about' %}">About Us</a></li>
+            <li {% if PATH_HIERARCHY.0 == "contact" %}class="active"{% endif %}><a href="{% url 'contact' %}">Contact Us</a></li>
           </ul>
         </div><!--/.navbar-collapse -->
       </div>
@@ -40,7 +40,7 @@
     {% block breadcrumbs-container %}
         <div class="container">
             <ol class="breadcrumb">
-                <li><a href="/">Home</a></li>
+                <li><a href="{% url 'home' %}">Home</a></li>
                 {% block breadcrumbs %}
                 {% endblock breadcrumbs %}
             </ol>
@@ -53,7 +53,7 @@
       <footer>
         <p><a rel="me" href="https://twitter.com/dcpython">Follow DC Python on Twitter!</a></p>
         <p><a href="https://github.com/DCPython/dcpython-django">Fork me on GitHub</a></p>
-        <p>&copy; 2008&ndash;{% now "Y" %} <a href="/legal">ZPUGDC Inc</a>, a non-profit 501(c)(3) in Maryland, USA. All rights reserved.</p>
+        <p>&copy; 2008&ndash;{% now "Y" %} <a href="{% url 'legal' %}">ZPUGDC Inc</a>, a non-profit 501(c)(3) in Maryland, USA. All rights reserved.</p>
         <p>Website proudly created with <a href="http://djangoproject.com">Django</a> by the <a href="http://meetup.com/DCPython">DC Python community</a>.</p>
       </footer>
     </div> <!-- /container -->

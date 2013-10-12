@@ -1,5 +1,5 @@
 from django.contrib import admin
-from support.models import Donor
+from dcpython.support.models import Donor
 from django.contrib.admin import SimpleListFilter
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Q

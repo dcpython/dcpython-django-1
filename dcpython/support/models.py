@@ -1,8 +1,10 @@
+import base64
+import os
+
 from django.db import models
 from localflavor.us.models import PhoneNumberField
 from PIL import Image
-import base64
-import os
+
 
 DONOR_LEVELS = (
     ("P", "Platinum"),
@@ -20,7 +22,6 @@ DONATION_TYPES = (
     ("G", "Pledge"),
 )
 
-# Create your models here.
 class Donor(models.Model):
     """
     Model for Donors to DCPYthon.

@@ -1,13 +1,12 @@
 # encoding: utf-8
 from __future__ import absolute_import
-
 from django.conf.urls import patterns, url
 
-from .models import Event
-from .views import EventYearArchiveView, EventMonthArchiveView, EventDetail
+from dcpython.events.models import Event
+from dcpython.events.views import EventYearArchiveView, EventMonthArchiveView, EventDetail
 
 
-urlpatterns = patterns('events.views',
+urlpatterns = patterns('dcpython.events.views',
     url(r'^$', 'event_list', name='event-list'),
 
     url(r'^(?P<year>\d{4})/$',
