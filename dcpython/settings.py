@@ -158,6 +158,8 @@ INSTALLED_APPS = (
     'dcpython.events',
     'dcpython.support',
     'django.contrib.admin',
+    'south',
+    'localflavor'
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )

@@ -61,7 +61,8 @@ Log into the vagrant vm::
 
 Sync the db::
 
-    $ /vagrant/manage.py syncdb --noinput
+    $ python /vagrant/manage.py syncdb --noinput
+    $ python /vagrant/manage.py migrate
 
 Start the django server::
 
