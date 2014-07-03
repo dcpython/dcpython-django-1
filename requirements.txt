@@ -12,3 +12,5 @@ python-dateutil==2.1
 django-localflavor==1.0
 South==0.8.2
 stripe==1.11.0
+django-cumulus
+#git+https://github.com/django-cumulus/django-cumulus.git

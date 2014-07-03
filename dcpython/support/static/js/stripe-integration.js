@@ -111,6 +111,8 @@ jQuery(function($) {
           }
         });
 
+      } else if (donation_type == "G") {
+        makeAjax();
       }
 
       function makeAjax() {

@@ -43,10 +43,6 @@ Clone your copy of github repository to your working directory (replace <your-us
 Install Vagrant caching plugin::
 
 	$ vagrant plugin install vagrant-cachier
-	
-Create a new ubuntu virtual machine called precise32::
-
-    $ vagrant box add precise32 http://files.vagrantup.com/precise32.box
 
 Start the vagrant environment::
 

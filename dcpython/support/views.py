@@ -2,6 +2,7 @@
 import stripe
 import json
 
+from django.core.mail import send_mail, mail_admins
 from dcpython.support.forms import DonorForm, PublicDonorForm, DonationForm
 from dcpython.support.models import Donor, Donation
 from django.conf import settings
@@ -87,6 +88,42 @@ def make_donation(request):
         donation = Donation(donor=donor, datetime=datetime.datetime.fromtimestamp(resp.created), type='C', completed=True, donation=resp.amount/100.0, transaction_id=resp.id)
         donation.save()
 
-        resp = {'redirect': '/donor/{}'.format(donor.secret)}
-        return HttpResponse(json.dumps(resp))
+    if donation_type == "G":
+        # we have a pending donation. save donor and donation to db.
+        donor = donor_form.save()
+        donation = Donation(donor=donor, datetime=datetime.datetime.utcnow(), type='G', completed=False, donation=donation_amount)
+        donation.save()
 
+    body = \
+"""
+Dear {},
+
+Thank you for your generous {} of ${} DCPython.
+
+You can update your profile at any time by accessing the following link:
+
+http://dcpython.org/donor/{}
+
+{}
+
+Best,
+
+Alex Clark
+President, DCPython
+"""
+    donation = 'We will process your donation shortly. It may take several days before it is reflected on the website.'
+    pledge = 'We will contact you shortly regarding your pledge.'
+    body = body.format(
+        donor.name,
+        'pledge' if donation_type == 'G' else 'donation',
+        donation_amount,
+        donor.secret,
+        pledge if donation_type == 'G' else donation
+        )
+
+    send_mail('Thank you for your support.', body, 'no-reply@dcpython.org',
+        [donor.email], fail_silently=False)
+
+    mail_admins('Donation pending', 'Donation pending', fail_silently=False, connection=None, html_message=None)
+    resp = {'redirect': '/donor/{}'.format(donor.secret)}
+    return HttpResponse(json.dumps(resp))
