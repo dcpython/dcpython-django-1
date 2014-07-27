@@ -25,6 +25,9 @@ urlpatterns = patterns('',
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
+    # Django all-auth
+    (r'^accounts/', include('allauth.urls')),
+
     url(r'^admin/', include(admin.site.urls)),
 )
 
