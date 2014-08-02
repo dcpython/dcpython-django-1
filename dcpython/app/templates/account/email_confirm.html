@@ -2,6 +2,7 @@
 
 {% load url from future %}
 {% load i18n %}
+{% load bootstrap3 %}
 {% load account %}
 
 {% block head_title %}{% trans "Confirm E-mail Address" %}{% endblock %}
@@ -15,9 +16,11 @@
       {% if confirmation %}
         {% user_display confirmation.email_address.user as user_display %}
         <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{email}}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
-        <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+        <form method="post" action="{% url 'account_confirm_email' confirmation.key %}" class="form">
           {% csrf_token %}
-          <button type="submit">{% trans 'Confirm' %}</button>
+          {% buttons %}
+            <button class="btn btn-primary" type="submit">{% trans "Confirm" %}</button>
+          {% endbuttons %}
         </form>
       {% else %}
         {% url 'account_email' as email_url %}
