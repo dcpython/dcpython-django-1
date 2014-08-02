@@ -4,6 +4,7 @@ jQuery(function($) {
     "use strict";
 
     var DONATION_AMTS = [
+      ["aws", 2500],
       ["platinum", 1000],
       ["gold", 500],
       ["silver", 250],
@@ -13,6 +14,7 @@ jQuery(function($) {
     ];
 
     var DONATION_AMTS_DICT = {
+      aws: 2500,
       platinum: 1000,
       gold: 500,
       silver: 250,

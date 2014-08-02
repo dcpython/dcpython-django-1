@@ -15,7 +15,7 @@ class MarkupTextarea(AdminPagedownWidget):
 
 class PostAdmin(admin.ModelAdmin):
     formfield_overrides = {
-        MarkupField: {'widget': MarkupTextarea },
+        MarkupField: {'widget': MarkupTextarea},
     }
     list_display = ('title', 'published',)
     readonly_fields = ('slug',)

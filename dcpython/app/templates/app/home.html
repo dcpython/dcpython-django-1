@@ -75,7 +75,7 @@
      </div>
       <div class="col-lg-4">
         <h2>Donate</h2>
-        <button type="button" class="btn btn-primary btn-lg">Donate Now</button>
+        <a class="btn btn-primary btn-lg" href="{% url 'support' %}">Donate Now!</a>
         {% if donor %}
           <h3>Featured {{ donor_level }} Sponsor:</h3>
           {% include "support/donor_acknowledgement.html" %}

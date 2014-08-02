@@ -16,6 +16,7 @@ GOOGLE_API_KEY = get_secret("GOOGLE_API_KEY")
 GOOGLE_ANALYTICS_ID = get_secret("GOOGLE_ANALYTICS_ID")
 GOOGLE_VERIFICATION_ID = get_secret("GOOGLE_VERIFICATION_ID")
 YOUTUBE_CHANNEL_ID = get_secret('YOUTUBE_CHANNEL_ID', 'UCGQZd1FaRdbZGnOuzh_n9Zg')
+YOUTUBE_PLAYLIST_FEED = 'http://gdata.youtube.com/feeds/base/users/UCGQZd1FaRdbZGnOuzh_n9Zg/playlists'
 STRIPE_PUBLIC = get_secret("STRIPE_PUBLIC", "pk_test_PqW3MffbT30GKcBFxChXmRXn")
 STRIPE_PRIVATE = get_secret("STRIPE_PRIVATE", "sk_test_zuwbBUyf1nDRwjaVNFxLAHil")
 
@@ -30,6 +31,7 @@ if 'SENDGRID_USERNAME' in os.environ:
     EMAIL_HOST_PASSWORD = get_secret('SENDGRID_PASSWORD')
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
+else:
     EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
 
 
@@ -182,6 +184,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'dcpython.app',
     'dcpython.events',
+    'dcpython.youtube',
     'dcpython.blog',
     'dcpython.support',
     'django.contrib.admin',

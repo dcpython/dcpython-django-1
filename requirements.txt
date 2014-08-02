@@ -21,3 +21,4 @@ markdown==2.4.1
 django-markupfield==1.2.0
 django-pagedown==0.1.0
 django-allauth==0.17.0
+feedparser==5.1.3

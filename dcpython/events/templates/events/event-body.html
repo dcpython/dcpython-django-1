@@ -31,7 +31,9 @@
     {% endif %}
 
     {% if not omit_youtube %}
-        {% youtube_playlist event.name event.start_time %}
+        {% for playlist in event.playlists.all %}
+            <iframe width="560" height="315" src="//www.youtube.com/embed/videoseries?list={{ playlist.remote_id }}" frameborder="0" allowfullscreen></iframe>
+        {% endfor %}
     {% endif %}
 
     <div itemprop="description">

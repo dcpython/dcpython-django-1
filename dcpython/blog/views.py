@@ -34,7 +34,7 @@ class PostDetail(DateDetailView):
     month_format = '%m'
 
     def get_object(self, queryset=None):
-    	tz = get_current_timezone()
+        tz = get_current_timezone()
         qs = queryset if queryset is not None else self.get_queryset()
         day_start = datetime.datetime(int(self.kwargs['year']), int(self.kwargs['month']), int(self.kwargs['day']))
         day_end = datetime.datetime.combine(day_start, datetime.time.max)

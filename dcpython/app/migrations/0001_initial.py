@@ -44,6 +44,14 @@ class Migration(SchemaMigration):
         ))
         db.create_unique(m2m_table_name, ['user_id', 'permission_id'])
 
+        # Adding model 'ServiceSync'
+        db.create_table(u'app_servicesync', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('service', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('last_synced', self.gf('django.db.models.fields.CharField')(max_length=50)),
+        ))
+        db.send_create_signal(u'app', ['ServiceSync'])
+
 
     def backwards(self, orm):
         # Deleting model 'User'
@@ -55,8 +63,17 @@ class Migration(SchemaMigration):
         # Removing M2M table for field user_permissions on 'User'
         db.delete_table(db.shorten_name(u'app_user_user_permissions'))
 
+        # Deleting model 'ServiceSync'
+        db.delete_table(u'app_servicesync')
+
 
     models = {
+        u'app.servicesync': {
+            'Meta': {'object_name': 'ServiceSync'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'last_synced': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'service': ('django.db.models.fields.CharField', [], {'max_length': '200'})
+        },
         u'app.user': {
             'Meta': {'object_name': 'User'},
             'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),

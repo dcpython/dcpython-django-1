@@ -2,6 +2,18 @@ html, body{
     height:100%;
 }
 
+.navbar .nav > li > a {
+    color:white;
+}
+
+.navbar .nav > li > a:hover {
+    color:lightgray;
+}
+
+.navbar-inverse .navbar-brand {
+    color:white;
+}
+
 .navbar {
     background: #366C99;
     border-radius: 0px;
@@ -54,7 +66,7 @@ html, body{
 .wrapper{
     height: auto !important;
     height: 100%;
-    padding: 0px 0 140px;
+    padding: 0px 0 170px;
     margin-bottom:-140px; /* height of footer */
     min-height: 100%;
 }

@@ -12,6 +12,14 @@ from django.template import RequestContext, loader
 import datetime
 stripe.api_key = settings.STRIPE_PRIVATE
 
+
+def andrew_w_singer(request):
+    """
+    Andrew W. Singer Memorial
+    """
+    context = RequestContext(request)
+    return render(request, 'support/andrew-w-singer.html', context)
+
 def support(request):
     # get all donors that are not pending and that have a valid donation
     all_donors = Donor.objects.active()

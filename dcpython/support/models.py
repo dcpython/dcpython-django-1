@@ -20,9 +20,10 @@ if settings.DEFAULT_FILE_STORAGE == 'cumulus.storage.SwiftclientStorage':
     storage = SwiftclientStorage()
 else:
     from django.core.files.storage import FileSystemStorage
-    storage = FileSystemStorage
+    storage = FileSystemStorage()
 
 LEVEL_DATA = (
+    ("A", "aws", 2500),
     ("P", "Platinum", 1000),
     ("G", "Gold", 500),
     ("S", "Silver", 250),
@@ -34,13 +35,14 @@ LEVEL_DATA = (
 DONOR_LEVELS = [(code, "{} (${})".format(name, value),) for code, name, value in LEVEL_DATA]
 
 DL_INDEX = {
-    'P': 0,
-    'G': 1,
-    'S': 2,
-    'B': 3,
-    'I': 4,
-    'O': 5,
-    None: 6,
+    'A': 0,
+    'P': 1,
+    'G': 2,
+    'S': 3,
+    'B': 4,
+    'I': 5,
+    'O': 6,
+    None: 7,
 }
 
 DONATION_TYPES = (
