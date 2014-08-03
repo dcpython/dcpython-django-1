@@ -46,6 +46,17 @@
             <li {% if PATH_HIERARCHY.0 == "about" %}class="active"{% endif %}><a href="{% url 'about' %}">About Us</a></li>
             <li {% if PATH_HIERARCHY.0 == "contact" %}class="active"{% endif %}><a href="{% url 'contact' %}">Contact Us</a></li>
           </ul>
+          <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hello, {{ user.username}}! <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                </ul>
+            {% else %}
+              <li><a href="{% url 'account_login' %}">Login</a></li>
+              <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+            {% endif %}
         </div><!--/.navbar-collapse -->
       </div>
     </div>
@@ -66,7 +77,7 @@
 
     </div>
 
-    <footer class="footer">
+    <footer class="footer">bootstrap_form
       <div class="container">
           <span class="social-buttons">
               <ul>
