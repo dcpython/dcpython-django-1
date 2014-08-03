@@ -2,15 +2,20 @@
 
 {% block title %}About Us{% endblock %}
 
+{% block breadcrumbs %}
+    <li class="active">About Us</li>
+{% endblock breadcrumbs %}
+
+
 {% block content %}
 <div class="container">
   <!-- Example row of columns -->
   <div class="row">
     <div class="col-lg-12">
       <h1>About Us</h1>
-        <p>We promote and support the use of Python software in Washington, D.C. and surrounding areas.</p>
+        <p>We promote and support Python software in Washington, D.C.</p>
       <h2>Mission</h2>
-        <p>We work toward our goal of serving the DC Python user and developer community through:</p>
+        <p>We serve the DC Python user and developer community through:</p>
         <ul>
             <li>Monthly, educational meetings;</li>
             <li>Periodic tutorials, symposia, conferences, and sprints;</li>
@@ -19,7 +24,11 @@
         </ul>
 
       <h2>Community</h2>
-        <p><span class="image-right"><a href="http://www.flickr.com/photos/vincentgallegos/3992955022/"><img src="/static/img/aclarktalks.png"></a></span>DC Python's <a href="/dcpython/events">monthly user group meeting</a>, held on the first tuesday of each month, is our most popular activity. One or two speakers will present on a topic of interest to the python community. We'd love for you to volunteer to present a topic that you're passionate about!</p>
+        <p><span class="image-right"><a href="http://www.flickr.com/photos/vincentgallegos/3992955022/"><img class="img-thumbnail" style="float: left; margin-right: 10px" src="{{ STATIC_URL }}img/aclarktalks.png"></a></span>DC Python's <a href="/dcpython/events">monthly user group meeting</a>, held on the first tuesday of each month, is our most popular activity. One or two speakers will present on a topic of interest to the Python community. We'd love for you to volunteer to present a topic that you're passionate about!</p>
+
+        <p>Our second regularly scheduled event is Office Hours, held the fourth Tuesday of the month each month.</p>
+
+        <p>Our third regularly scheduled event is PythonLab: share and learn Python 2.7, held every Saturday.</p>
 
         <p>We also regularly support <a href="{% url 'event-list' %}">sprints and tutorials</a>. If you're an open source project that could use a sprint or you're looking to do training, DC Python can help you with finding space, resources, and in marketing your event.</p>
 
@@ -29,40 +38,50 @@
       <h2>History</h2>
         <p>DC Python is the longest continuously meeting Python-technology-focused user's group in DC, and one of the oldest in the world.</p>
         <p>Formerly known as ZPUGDC (the Zope/Python Users Group of DC), DC Python was started in 1999 by Chris Abraham. Later it restarted as a Plone-focused user group led by Joel Burton. DC Python's first and current President and Executive Director, Alex Clark, has been an integral part of both the organization of events, as well as the promotion and growth of the group since ZPUGDC's inception under Joel's leadership. By 2006, Alex had fully assumed responsibility for running and maintaining the group and its activities and continues to lead the group (with help from many others) to the present day.</p>
-        <p><span class="image-right"><img src="{{ STATIC_URL }}img/ploneconf2.png"></p></span>
+        <p><span class="image-right"><img class="img-thumbnail" style="float: left; margin-right: 10px" src="{{ STATIC_URL }}img/ploneconf2.png"></p></span>
         <p>For many years, Zope was the technology that brought people to Python. Our focus at ZPUGDC reflected that primary interest. However, in keeping with the trends of recent years, we've expanded our outreach to encompass any/all Python-related technologies, subsequently re-naming our organization to DC Python in order to reflect our more current and broader outreach. We are proud of our history, our legacy and all of our names!</p>
         <p>Over the years, we have provided the DC Python community with numerous trainings, speaking engagements, boot camps, sprints, group meetings and other related activities. However, our most significant contribution to the open-source development world to date is the very successful organization and hosting of the 2008 Plone Conference in Washington, D.C.. Over 300 participants attended events including the conference, pre-conference trainings and a post-conference development sprint. It was during that time that in order to enhance, strengthen and solidfy our outreach to the community we serve, DC Python (known legally as ZPUGDC, Inc.) formally formed and organized as a non-profit 501(c)(3) organization registered in the State of Maryland, USA. Our non-profit status enables us to serve the Python community with structure, transparency and legitimacy.</p>
+
+
       <h2>Board of Directors</h2>
         <p>DC Python's board is comprised of volunteers from the DC Python community who donate their time and expertise to handle the logistics of running the user group's activities.</p>
         <p>Currently, the following people serve on the DC Python board:</p>
         
-        <section>
-            <div><img class="exec-pic" alt="Alex Clark" src="{{ STATIC_URL }}img/aclark-2013.jpg"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+            <div><img class="img-thumbnail" style="float: left; margin-right: 10px" class="exec-pic" alt="Alex Clark" src="{{ STATIC_URL }}img/aclark-2013.jpg"></div>
             <div>
                 <h3>Alex Clark, President and Executive Director</h3>
                 <p>Alex Clark is an Author, Musician, Python Web Developer, and more. He has a Computer Science Degree from Loyola College in Maryland and has <a href="http://aclark.net">worked professionally</a> as a system administrator, network engineer, and software engineer since 1996.</p>
             </div>
-        </section>
         
-        <section>
-            <div><img class="exec-pic" alt="David Greisen" src="{{ STATIC_URL }}img/dgreisen.jpg"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+            <div><img class="img-thumbnail" style="float: left; margin-right: 10px" class="exec-pic" alt="David Greisen" src="{{ STATIC_URL }}img/dgreisen.jpg"></div>
             <div>
                 <h3>David Greisen, Vice President</h3>
                 <p>David Greisen is a lawyer and programmer. He has a B.S. in physics from Harvey Mudd College, and a J.D. from University of Chicago. He is interested in the intersection between law and technology. David currently works with the Consumer Financial Protection Bureau.</p>
             </div>
-        </section>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
         
-        <section>
-            <div><img class="exec-pic" alt="Amy Clark" src="{{ STATIC_URL }}img/amy.jpg"></div>
+            <div><img class="img-thumbnail" style="float: left; margin-right: 10px" class="exec-pic" alt="Amy Clark" src="{{ STATIC_URL }}img/amy.jpg"></div>
             <div>
                 <h3>Amy Clark, Secretary and Treasurer</h3>
                     <p>Amy Clark brings many years of professional sales, marketing and management, administrative and financial/legal experience to the DC Python team. She is in charge of all financial, legal, and government-related (both state and federal) responsibilities, as well as maintaining the records and day-to-date operation of the organization. Amy facilitates a seamless, uncomplicated provision of DC Python's offerings and ensures the quality, accuracy and efficiency of all DC Python projects and services.</p>
             </div>
-        </section>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
         
         <p>If you're interested in serving on the DC Python board, please <a class="mail-link" href="mailto:board@dcpython.org">let us know</a>! We are actively seeking new members to help us fulfill our mission to the community.</p>
-        
-
         
     </div>
   </div>
