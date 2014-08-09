@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding model 'Donor'
-        db.create_table(u'support_donor', (
+        db.create_table(u'donate_donor', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
             ('phone', self.gf('localflavor.us.models.PhoneNumberField')(max_length=20, null=True, blank=True)),
@@ -23,12 +23,12 @@ class Migration(SchemaMigration):
             ('reviewed', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('valid_until', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
         ))
-        db.send_create_signal(u'support', ['Donor'])
+        db.send_create_signal(u'donate', ['Donor'])
 
         # Adding model 'Donation'
-        db.create_table(u'support_donation', (
+        db.create_table(u'donate_donation', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('donor', self.gf('django.db.models.fields.related.ForeignKey')(related_name='donations', to=orm['support.Donor'])),
+            ('donor', self.gf('django.db.models.fields.related.ForeignKey')(related_name='donations', to=orm['donate.Donor'])),
             ('datetime', self.gf('django.db.models.fields.DateTimeField')()),
             ('type', self.gf('django.db.models.fields.CharField')(max_length=1)),
             ('completed', self.gf('django.db.models.fields.BooleanField')(default=False)),
@@ -38,24 +38,24 @@ class Migration(SchemaMigration):
             ('level', self.gf('django.db.models.fields.CharField')(max_length=1, null=True, blank=True)),
             ('reviewed', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
-        db.send_create_signal(u'support', ['Donation'])
+        db.send_create_signal(u'donate', ['Donation'])
 
 
     def backwards(self, orm):
         # Deleting model 'Donor'
-        db.delete_table(u'support_donor')
+        db.delete_table(u'donate_donor')
 
         # Deleting model 'Donation'
-        db.delete_table(u'support_donation')
+        db.delete_table(u'donate_donation')
 
 
     models = {
-        u'support.donation': {
+        u'donate.donation': {
             'Meta': {'object_name': 'Donation'},
             'completed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'datetime': ('django.db.models.fields.DateTimeField', [], {}),
             'donation': ('django.db.models.fields.DecimalField', [], {'max_digits': '10', 'decimal_places': '2'}),
-            'donor': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'donations'", 'to': u"orm['support.Donor']"}),
+            'donor': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'donations'", 'to': u"orm['donate.Donor']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'level': ('django.db.models.fields.CharField', [], {'max_length': '1', 'null': 'True', 'blank': 'True'}),
             'reviewed': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
@@ -63,7 +63,7 @@ class Migration(SchemaMigration):
             'type': ('django.db.models.fields.CharField', [], {'max_length': '1'}),
             'valid_until': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'})
         },
-        u'support.donor': {
+        u'donate.donor': {
             'Meta': {'object_name': 'Donor'},
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -80,4 +80,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['support']
+    complete_apps = ['donate']

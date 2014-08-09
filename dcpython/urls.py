@@ -6,16 +6,17 @@ admin.autodiscover()
 
 urls = ()
 
-urlpatterns = patterns('',
-    url(r'^$', 'dcpython.app.views.home', name='home'),
-    url(r'^events/', include('dcpython.events.urls')),
-    url(r'^blog/', include('dcpython.blog.urls')),
-    url(r'^donate/', include('dcpython.blog.urls')),
-    url(r'^about/$', 'dcpython.app.views.about', name='about'),
-    url(r'^deals/$', 'dcpython.app.views.deals', name='deals'),
-    url(r'^resources/$', 'dcpython.app.views.resources', name='resources'),
-    url(r'^legal/$', 'dcpython.app.views.legal', name='legal'),
-    url(r'^contact/$', 'dcpython.app.views.contact', name='contact'),
+urlpatterns = patterns('dcpython',
+    url(r'^$', 'app.views.home', name='home'),
+    url(r'^events/', include('events.urls')),
+    url(r'^blog/', include('blog.urls')),
+    url(r'^donate/', include('donate.urls')),
+    url(r'^about/$', 'app.views.about', name='about'),
+    url(r'^deals/$', 'app.views.deals', name='deals'),
+    url(r'^resources/$', 'app.views.resources', name='resources'),
+    url(r'^legal/$', 'app.views.legal', name='legal'),
+    url(r'^contact/$', 'app.views.contact', name='contact'),
+
     # url(r'^$', 'dcpython.views.home', name='home'),
     # url(r'^dcpython/', include('dcpython.foo.urls')),
 
