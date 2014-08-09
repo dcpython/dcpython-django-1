@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render
-from dcpython.support.models import Donor
+from dcpython.donate.models import Donor
 from dcpython.events.models import Event
 from dcpython.blog.models import Post
 from django.conf import settings

@@ -21,7 +21,7 @@
 
 {% block stylesheets %}
     {{ block.super }}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/support.css" type="text/css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/donate.css" type="text/css">
 {% endblock stylesheets %}
 
 {% block content %}
@@ -180,7 +180,7 @@
     <div class="row">
     {% for donor in donors %}
       <div class="col-lg-4">
-        {% include "support/donor_acknowledgement.html" %}
+        {% include "donate/donor_acknowledgement.html" %}
       </div>
     {% if forloop.counter|divisibleby:3 %}
     </div>

@@ -183,7 +183,7 @@ INSTALLED_APPS = [
     'dcpython.events',
     'dcpython.youtube',
     'dcpython.blog',
-    'dcpython.support',
+    'dcpython.donate',
     'django.contrib.admin',
     'south',
     'localflavor',

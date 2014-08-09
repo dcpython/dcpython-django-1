@@ -5,8 +5,8 @@ from collections import OrderedDict
 
 import stripe
 from django.core.mail import send_mail, mail_admins
-from dcpython.support.forms import DonorForm, PublicDonorForm, DonationForm
-from dcpython.support.models import Donor, Donation, LEVEL_DATA
+from dcpython.donate.forms import DonorForm, PublicDonorForm, DonationForm
+from dcpython.donate.models import Donor, Donation, LEVEL_DATA
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
@@ -19,9 +19,9 @@ def andrew_w_singer(request):
     Andrew W. Singer Memorial
     """
     context = RequestContext(request)
-    return render(request, 'support/andrew-w-singer.html', context)
+    return render(request, 'donate/andrew-w-singer.html', context)
 
-def support(request):
+def donate(request):
     # get all donors that are not pending and that have a valid donation
     all_donors = Donor.objects.active()
     context = RequestContext(request)
@@ -36,7 +36,7 @@ def support(request):
                      "stripe_public": settings.STRIPE_PUBLIC,
                      "all_donors": all_sorted_donors,
                      "no_logo_tiers": ["Other", "Individual"]})
-    return render(request, 'support/support.html', context)
+    return render(request, 'donate/donate.html', context)
 
 def donor_update(request, secret=None):
     donor = get_object_or_404(Donor, secret=secret)
@@ -52,7 +52,7 @@ def donor_update(request, secret=None):
         public_form = PublicDonorForm(instance=donor)
     context = RequestContext(request)
     context.update({"secret": secret, "form": form, "public_form": public_form, "name": donor.name, 'donor': donor})
-    return render(request, 'support/donor_update.html', context)
+    return render(request, 'donate/donor_update.html', context)
 
 def make_donation(request):
     """
@@ -69,7 +69,7 @@ def make_donation(request):
     if not donor_form.is_valid():
         context = RequestContext(request)
         context.update({"donor_form": donor_form, "donation_form": donation_form})
-        template = loader.get_template('support/donate_ajax.html')
+        template = loader.get_template('donate/donate_ajax.html')
         return HttpResponse(json.dumps({"html": template.render(context)}))
 
     if not donation_form.is_valid():

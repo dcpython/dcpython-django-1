@@ -3,7 +3,7 @@
 {% block title %}Update information for {{ name }}{% endblock %}
 
 {% block breadcrumbs %}
-    <li><a href="{% url 'support' %}">Donate</a></li>
+    <li><a href="{% url 'donate' %}">Donate</a></li>
     <li class="active">Profile</li>
 {% endblock breadcrumbs %}
 
@@ -39,7 +39,7 @@
           <div class="col-lg-4">
             <fieldset>
               <legend>Acknowledgment Preview</legend>
-              {% include "support/donor_acknowledgement.html" %}
+              {% include "donate/donor_acknowledgement.html" %}
             </fieldset>
           </div>
 

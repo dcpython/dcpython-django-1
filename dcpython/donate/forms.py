@@ -1,4 +1,4 @@
-from dcpython.support.models import Donor, DONATION_TYPES
+from dcpython.donate.models import Donor, DONATION_TYPES
 from django import forms
 
 class DonorForm(forms.ModelForm):
