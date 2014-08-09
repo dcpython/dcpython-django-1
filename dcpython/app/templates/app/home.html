@@ -74,13 +74,13 @@
         </div>
      </div>
       <div class="col-lg-4">
-        <h2><a href="{% url 'support' %}">Donate</a></h2>
+        <h2><a href="{% url 'donate' %}">Donate</a></h2>
         {% if donor %}
           <h3>Featured {{ donor_level }} Donor</h3>
-          {% include "support/donor_acknowledgement.html" %}
+          {% include "donate/donor_acknowledgement.html" %}
         {% endif %}
         <br />
-        <a class="btn btn-primary btn-lg" href="{% url 'support' %}">Donate Now!</a>
+        <a class="btn btn-primary btn-lg" href="{% url 'donate' %}">Donate Now!</a>
       </div>
     </div>
   </div>

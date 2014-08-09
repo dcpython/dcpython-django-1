@@ -10,7 +10,7 @@ class DCPythonTest(TestCase):
         Tests that the url routes return a 200 status code.
         """
         c = Client()
-        routes = map(reverse, ['about', 'contact', 'deals', 'home', 'legal', 'make_donation', 'resources', 'support'])
+        routes = map(reverse, ['about', 'contact', 'deals', 'home', 'legal', 'make_donation', 'resources', 'donate'])
         for route in routes:
             response = c.get(route)
             self.assertEqual(response.status_code, 200)

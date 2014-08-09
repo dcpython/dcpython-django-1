@@ -39,7 +39,7 @@
           <ul class="nav navbar-nav">
             <li {% if PATH_HIERARCHY|length == 0 %}class="active"{% endif %}><a href="{% url 'home' %}" rel="home">Home</a></li>
             <li {% if PATH_HIERARCHY.0 == "events" %}class="active"{% endif %}><a href="{% url 'event-list' %}">Events</a></li>
-            <li {% if PATH_HIERARCHY.0 == "donate" %}class="active"{% endif %}><a href="{% url 'support' %}">Donate</a></li>
+            <li {% if PATH_HIERARCHY.0 == "donate" %}class="active"{% endif %}><a href="{% url 'donate' %}">Donate</a></li>
             <!--<li {% if PATH_HIERARCHY.0 == "deals" %}class="active"{% endif %}><a href="/deals">Member Deals</a></li>-->
             <li {% if PATH_HIERARCHY.0 == "blog" %}class="active"{% endif %}><a href="/blog/">Blog</a></li>
             <li {% if PATH_HIERARCHY.0 == "resources" %}class="active"{% endif %}><a href="{% url 'resources' %}">Resources</a></li>
