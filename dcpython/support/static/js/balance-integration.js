@@ -39,7 +39,7 @@ jQuery(function($) {
 
     $("#donationAmt").change(handle_donation_change).keyup(handle_donation_change);
     handle_donation_change();
-    
+
     // LEVEL CLICKS
     var handle_donor_lvl_click = function(e) {
       var donation = DONATION_AMTS_DICT[$(e.currentTarget).attr("class").split(" ")[1]];
@@ -70,7 +70,7 @@ jQuery(function($) {
       $("#submit_btn").attr("disabled", "disabled");
       var donation_amount = $("#donationAmt").val();
 
-      // validate amount first - 1 to 999999.99 dollars 
+      // validate amount first - 1 to 999999.99 dollars
       // TODO this is not ideal b/c full form is not validated
       if (!/^[1-9][0-9]{0,5}(\.[0-9]{1,2})?$/.test(donation_amount)) {
         $("#donationAmt").parents(".form-group").addClass("has-error");
@@ -88,7 +88,7 @@ jQuery(function($) {
       // get bank token if trying to use bank
       if (donation_type == "B") {
         form = $("#form-B");
-          
+
         var bankAccountData = {
           name: $("#name").val(),
           routing_number: $("#routing_number").val(),
