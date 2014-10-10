@@ -1,1 +1,4 @@
 https://www.apache.org/licenses/LICENSE-2.0.html
+
+this application also uses reveal.js, which is licensed under the MIT license (http://opensource.org/licenses/MIT)
+
