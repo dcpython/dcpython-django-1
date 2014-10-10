@@ -2,7 +2,7 @@
 from __future__ import absolute_import
 from django.conf.urls import patterns, url
 
-from dcpython.events.views import EventYearArchiveView, EventMonthArchiveView, EventDetail
+from dcpython.events.views import EventYearArchiveView, EventMonthArchiveView, EventDetail, SlideShow
 
 
 urlpatterns = patterns('dcpython.events.views',
@@ -17,4 +17,7 @@ urlpatterns = patterns('dcpython.events.views',
     url(r'^(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{1,2})/(?P<slug>[^/]+)/$',
         EventDetail.as_view(),
         name="event-detail"),
+    url(r'^slides/(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{1,2})/(?P<slug>[^/]+)/$',
+        SlideShow.as_view(),
+        name="slideshow"),
 )

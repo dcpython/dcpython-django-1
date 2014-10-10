@@ -20,5 +20,7 @@
 
         <a class="btn btn-primary pull-right" href="{{ object.meetup_url }}">View on Meetup.com</a>
         {% display_event object omit_title=True %}
+        <a href="{{ object.get_slideshow_url }}"> see slides!</a>
+
     </div>
 {% endblock %}

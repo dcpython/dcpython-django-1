@@ -113,3 +113,8 @@ class Event(models.Model):
                                                'year': self.local_start_time.year,
                                                'month': self.local_start_time.month,
                                                'day': self.local_start_time.day})
+    def get_slideshow_url(self):
+        return reverse('slideshow', kwargs={'slug': self.slug,
+                                            'year': self.local_start_time.year,
+                                            'month': self.local_start_time.month,
+                                            'day': self.local_start_time.day})

@@ -17,6 +17,7 @@ def event_list(request):
     return render(request, 'events/event_list.html', ctx)
 
 
+
 class EventYearArchiveView(YearArchiveView):
     queryset = Event.objects.all()
     date_field = "start_time"
@@ -44,3 +45,20 @@ class EventDetail(DateDetailView):
                       start_time__year=self.kwargs['year'],
                       start_time__month=self.kwargs['month'],
                       start_time__day=self.kwargs['day'])
+
+
+class SlideShow(EventDetail):
+    #FIXME this is not a pretty looking class ;P
+    template_name = 'events/slideshow.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(EventDetail, self).get_context_data(**kwargs)
+        talks = ctx['object'].description.strip().split("-" * 5)
+
+        t = []
+        for talk in talks:
+            formatted = talk.replace("<p>", "").replace("</p>", "\n").split("\n")
+            t.append({"title": formatted[0], "description": "\n".join(formatted[1:])})
+
+        ctx['talks'] = t
+        return ctx
