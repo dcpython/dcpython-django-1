@@ -9,16 +9,6 @@ We use **Git version control** and `GitHub <http://www.github.com>`_ for project
 
 We use the `Vagrant <http://www.vagrantup.com>`_ development environment. Vagrant allows us to standardize our development and production environments and makes it easy for everybody to get up and running. Vagrant creates a virtual machine, sets up django, database, and everything, then mirrors and syncs the project source code on both your machine and the vm. That way, you make changes to the code on your machine, the changes are mirrored in the vm. Then you run Django on the VM. Now, you can do local development, but you don't have to set up Django and the Database. Very cool.
 
-Plan
-----
-
-Pages we want to get done by 5pm on Tuesday, October 9th, 2013:
-
-#. Events page
-#. Home page
-#. Donation page
-#. About us
-#. Cool links (resources)
 
 Installation
 ------------
@@ -32,36 +22,30 @@ Create a `GitHub <http://www.github.com>`_ account.
 
 While signed into github, go to https://github.com/DCPython/dcpython-django and click the "fork" button. This will create a fork (or copy) of the dcpython-django application in your github account.
 
-From the commandline 
+From the commandline
 ++++++++++++++++++++
 
 Clone your copy of github repository to your working directory (replace <your-username> with  your github username)::
 
-	$ git clone git@github.com:<your-username>/dcpython-django.git 
-	$ cd dcpython-django
+    $ git clone git@github.com:<your-username>/dcpython-django.git
+    $ cd dcpython-django
 
 Install Vagrant caching plugin::
 
-	$ vagrant plugin install vagrant-cachier
-	
-Create a new ubuntu virtual machine called precise32::
-
-    $ vagrant box add precise32 http://files.vagrantup.com/precise32.box
+    $ vagrant plugin install vagrant-cachier
 
 Start the vagrant environment::
 
     $ vagrant up
 
-.. Note:: TODO - shouldn't have to do anything else, but getting a permissions issue with postgres - help needed
+YOU WILL GET HUGE RED ERRORS: check to ensure this is a permissions issue with postgres, then continue with these instructions
+TODO - please help me fix this bug!
 
 Log into the vagrant vm::
 
     $ vagrant ssh
     $ cd /vagrant
-
-Sync the db::
-
-    $ /vagrant/manage.py syncdb --noinput
+    $ sh config_db.sh
 
 Start the django server::
 
@@ -85,20 +69,20 @@ Destroy the development environment::
 
 Log into the development environment::
 
-	$ vagrant ssh
+    $ vagrant ssh
 
 From the vagrant ssh command line
 +++++++++++++++++++++++++++++++++
 
 Start django::
 
-	$ cd /vagrant
-	$ foreman start
+    $ cd /vagrant
+    $ foreman start
 
 Django manage.py::
 
-	$ cd /vagrant
-	$ ./manage.py <params>
+    $ cd /vagrant
+    $ ./manage.py <params>
 
 You can visit the django site at http://localhost:5000
 
@@ -112,35 +96,35 @@ Start New Feature
 
 Merge any changes from master::
 
-	$ git pull https://github.com/DCPython/dcpython-django.git develop
+    $ git pull https://github.com/DCPython/dcpython-django.git
 
 List all the changes in this branch::
 
-	$ git log
+    $ git log
 
 Create a new feature branch in which to make changes::
 
-	$ git checkout -b "descriptive-name-of-branch"
+    $ git checkout -b "descriptive-name-of-branch"
 
 List branches::
 
-	$ git branch
+    $ git branch
 
 Switch to another branch::
 
-	$ git checkout "name-of-branch"
+    $ git checkout "name-of-branch"
 
 View status of your files (which have changed, which are staged for commit)::
 
-	$ git status
+    $ git status
 
 Add files to be committed::
 
-	$ git add name-of-file
+    $ git add name-of-file
 
 Commit changes::
 
-	$ git commit
+    $ git commit
 
 .. Note:: you must add a commit message. first line short title (~50 characters); skip line; detailed description of changes
 
@@ -149,10 +133,35 @@ Merge Feature
 
 Merge any changes from master that have occurred while you were programming::
 
-	$ git pull https://github.com/DCPython/dcpython-django.git develop
+    $ git pull https://github.com/DCPython/dcpython-django.git
 
 Push changes to your github repo::
 
-	$ git push -u origin name-of-branch
+    $ git push -u origin name-of-branch
 
 Now, go to github, select the branch you just pushed from the drop-down, then click "pull request" to request your changes be merged with master.
+
+Deployment
+----------
+
+Heroku is generously donating servers. Rackspace is generously donating storage/static file serve.
+
+On Heroku:
+ * `dcpython-develop` - the test server
+ * `dcpython` - the production server
+
+You must set up your repository in order to deploy:
+
+1. Install Heroku toolbelt: https://toolbelt.heroku.com/
+2. ``git remote add heroku git@heroku.com:dcpython.git``
+3. ``git remote add forked git@heroku.com:dcpython-develop.git``
+
+To deploy to dev environment:
+
+1. ``git push forked master``
+2. ``heroku run python manage.py migrate -a dcpython-develop``
+
+To deploy to production:
+
+1. ``git push heroku master``
+2. ``heroku run python manage.py migrate -a dcpython``

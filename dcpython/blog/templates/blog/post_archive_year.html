@@ -1,0 +1,29 @@
+{% extends "app/base.html" %}
+
+
+{% block title %}{{ object.name }} — DCPython{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="{% url 'blog' %}">Blog</a></li>
+    <li class="active">{{ year|date:"Y" }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h1>All Posts for {{ year|date:"Y" }}</h1>
+        </div>
+
+        {% for post in object_list %}
+            {% ifchanged post.published.month %}
+                <hr />
+                <a href="{% url 'post-month-archive' year=post.published.year month=post.published.month %}">
+                    <h2>{{ post.published|date:"F" }}</h2>
+                </a>
+            {% endifchanged %}
+            <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+            {% include "blog/post-tagline.html" %}
+        {% endfor %}
+    </div>
+  {% include "blog/post-count-js.html" %}
+{% endblock %}

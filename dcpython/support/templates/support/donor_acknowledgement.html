@@ -1,0 +1,17 @@
+{% if donor.public_url %}
+<a href="{{ donor.public_url }}">
+{% endif %}
+{% if donor.public_logo and level_name not in no_logo_tiers %}
+<img src="{{ donor.public_logo.url }}" style="width:100%;height:auto;" alt="{{ donor.public_name }}" title="{{ donor.public_name }}" />
+{% elif donor.public_name %}
+<h3>{{ donor.public_name }}</h3>
+{% endif %}
+{% if donor.public_url %}
+</a>
+{% endif %}
+{% if donor.public_slogan %}
+<p class="text-center">{{ donor.public_slogan }}</p>
+{% endif %}
+{% if not donor.public_name and not donor.public_logo %}
+Anonymous donor
+{% endif %}

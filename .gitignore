@@ -5,6 +5,8 @@ staticfiles
 # C extensions
 *.so
 
+dcpython/media/
+
 # Packages
 *.egg
 *.egg-info

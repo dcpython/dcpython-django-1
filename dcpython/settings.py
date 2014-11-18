@@ -1,20 +1,44 @@
+from __future__ import print_function
+
 import os
-env = os.environ
 
-BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+AUTH_USER_MODEL = 'app.User'
 
-MEETUP_API_KEY = env.get("MEETUP_API_KEY", "5b7d196f674c6d74514b1c45dc4a4f")
-GOOGLE_API_KEY = env.get("GOOGLE_API_KEY", "AIzaSyAI0V0ZxALAxiDf1gpOywhj_REJHcu_sAU")
-YOUTUBE_CHANNEL_ID = os.environ.get('YOUTUBE_CHANNEL_ID', 'UCGQZd1FaRdbZGnOuzh_n9Zg')
-BALANCED_URI = env.get("BALANCED_URI", "/v1/marketplaces/TEST-MP4xsJ9r6w8jzy6aD38AMms8")
-BALANCED_SECRET = env.get("BALANCED_SECRET", "ak-test-T0L0y34t8N1NGqE4xYEz2kCdOZFFBPnb")
+def get_secret(var, default=None):
+    return os.environ.get(var, default)
+# base of repo
+BASE_DIR = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+# path to root django app
+ROOT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)))
+
+VAGRANT = 'vagrant' in BASE_DIR
+
+MEETUP_API_KEY = get_secret("MEETUP_API_KEY")
+GOOGLE_API_KEY = get_secret("GOOGLE_API_KEY")
+GOOGLE_ANALYTICS_ID = get_secret("GOOGLE_ANALYTICS_ID")
+GOOGLE_VERIFICATION_ID = get_secret("GOOGLE_VERIFICATION_ID")
+YOUTUBE_CHANNEL_ID = get_secret('YOUTUBE_CHANNEL_ID', 'UCGQZd1FaRdbZGnOuzh_n9Zg')
+YOUTUBE_PLAYLIST_FEED = 'http://gdata.youtube.com/feeds/base/users/UCGQZd1FaRdbZGnOuzh_n9Zg/playlists'
+STRIPE_PUBLIC = get_secret("STRIPE_PUBLIC", "pk_test_PqW3MffbT30GKcBFxChXmRXn")
+STRIPE_PRIVATE = get_secret("STRIPE_PRIVATE", "sk_test_zuwbBUyf1nDRwjaVNFxLAHil")
 
 # Django settings for dcpython project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+if 'SENDGRID_USERNAME' in os.environ:
+    EMAIL_HOST = 'smtp.sendgrid.net'
+    EMAIL_HOST_USER = get_secret('SENDGRID_USERNAME')
+    EMAIL_HOST_PASSWORD = get_secret('SENDGRID_PASSWORD')
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
+
+
 ADMINS = (
+    ('David Greisen', 'dgreisen@gmail.com'),
     # ('Your Name', 'your_email@example.com'),
 )
 
@@ -37,6 +61,15 @@ DATABASES = {
 if "DATABASE_URL" in os.environ:
     DATABASES['default'] = dj_database_url.config()
 
+try:
+    import sys
+    print("Creating sqlite test database")
+    if 'test' in sys.argv:
+        DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3'}
+except ImportError:
+    print("Tried to set up test database, but sys module could not be imported")
+
+
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -48,7 +81,7 @@ ALLOWED_HOSTS = ["*"]
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/New_York'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -69,29 +102,29 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(ROOT_DIR, 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = 'staticfiles'
+# STATIC_ROOT = 'staticfiles'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+STATIC_URL = get_secret('CLOUDFILES_CONTAINER_STATIC_URL', '/static/')
 
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    # os.path.join(BASE_DIR, 'static'),
+#    os.path.join(ROOT_DIR, 'static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -103,7 +136,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '!a7_kr2zeol$1f1znql=#+z-eonwy1%t1%3$u@_r4dhnn=_gmx'
+SECRET_KEY = get_secret('SECRET_KEY', 'not a secret!!')
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -118,6 +151,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'djangosecure.middleware.SecurityMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -142,24 +176,33 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
-    'app.context_processors.path_hierarchy',
+    'dcpython.app.context_processors.path_hierarchy',
+    'dcpython.app.context_processors.google_analytics',
 )
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
+    'cumulus',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djangosecure',
     'bootstrap3',
-    'app',
-    'events',
-    'support',
+    'dcpython.app',
+    'dcpython.events',
+    'dcpython.youtube',
+    'dcpython.blog',
+    'dcpython.support',
     'django.contrib.admin',
+    'south',
+    'localflavor',
+    'django_extensions',
+    'pagedown',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-)
+]
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
@@ -192,9 +235,29 @@ LOGGING = {
     }
 }
 
+CUMULUS = {
+    'USERNAME': get_secret('RACKSPACE_CLOUD_USERNAME'),
+    'API_KEY': get_secret('RACKSPACE_CLOUD_API_KEY'),
+    'CONTAINER': get_secret('CLOUDFILES_CONTAINER_MEDIA'),
+    'STATIC_CONTAINER': get_secret('CLOUDFILES_CONTAINER_STATIC'),
+    'PYRAX_IDENTITY_TYPE': 'rackspace',
+    'USE_SSL': True,
+}
+
+if 'RACKSPACE_CLOUD_USERNAME' in os.environ:
+    DEFAULT_FILE_STORAGE = 'cumulus.storage.SwiftclientStorage'
+    STATICFILES_STORAGE = 'cumulus.storage.SwiftclientStaticStorage'
+else:
+    INSTALLED_APPS.remove('cumulus')
+
 # load sample data
 if "DATABASE_URL" in os.environ:
     FIXTURE_DIRS = (
        '/vagrant/dcpython/fixtures',
     )
 
+if VAGRANT:
+    INSTALLED_APPS.remove('djangosecure')
+else:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True

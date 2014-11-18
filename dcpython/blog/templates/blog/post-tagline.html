@@ -1,0 +1,10 @@
+<p>
+    {% if post.author %}
+        {% if post.author.meetup_id %}
+        <a href="http://www.meetup.com/members/{{ post.author.meetup_id }}/">{{ post.author.username }}</a> - 
+        {% else %}
+        {{ post.author.username }} -
+        {% endif %}
+    {% endif %}
+    {{ post.published }} (<a href="{{ post.get_absolute_url }}#disqus_thread"></a>)
+</p>

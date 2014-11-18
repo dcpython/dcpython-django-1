@@ -1,0 +1,194 @@
+{% extends "app/base.html" %}
+{% load bootstrap3 %}
+
+{% block title %}Donate{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="active">Donate</li>
+{% endblock breadcrumbs %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script src="{{ STATIC_URL }}js/stripe-integration.js"></script>
+    <script type="text/javascript">
+      // This identifies your website in the createToken call below
+      Stripe.setPublishableKey("{{ stripe_public }}");
+      // ...
+    </script>
+
+{% endblock javascript %}
+
+{% block stylesheets %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/support.css" type="text/css">
+{% endblock stylesheets %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-header">
+            <h1>Donate</h1>
+            <h3>Please donate to <a href="/about">support our mission</a> &mdash; Learn more about <a href="/andrew-w-singer.html">Andrew W. Singer</a></h3>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="donor_lvl aws">
+              <h1><a href="/andrew-w-singer.html">Andrew W. Singer</a> Memorial Level</h1>
+              <h2>$2500</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="donor_lvl platinum">
+              <h1>Platinum</h1>
+              <h2>$1000+</h2>
+            </div>
+
+            <div class="donor_lvl gold">
+              <h1>Gold</h1>
+              <h2>$500+</h2>
+            </div>
+
+            <div class="donor_lvl silver">
+              <h1>Silver</h1>
+              <h2>$250+</h2>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="donor_lvl bronze">
+              <h1>Bronze</h1>
+              <h2>$100+</h2>
+            </div>
+
+            <div class="donor_lvl individual">
+              <h1>Individual</h1>
+              <h2>$50+</h2>
+            </div>
+
+            <div class="donor_lvl other">
+              <h1>Other</h1>
+              <h2>$25</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <!-- donation amt form -->
+        <form role="form" class="form-horizontal" style="margin-top:25px">
+          <div class="form-group">
+            <label for="donationAmt" class="col-lg-2 control-label">$</label>
+            <div class="col-lg-10">
+              <input type="text" class="form-control" placeholder="Donation" id="donationAmt" />
+            </div>
+          </div>
+        </form>
+
+        <!-- payment select form -->
+        <form class="form-inline" role="form" style="margin-top: 40px; margin-bottom: 16px; height: 34px;" id="payment-select-form">
+          <div class="radio" id="donate_source">
+            <label><input type="radio" name="donate_source" id="donate_source_C" value="C" checked="checked">Credit Card</label> &nbsp;&nbsp;&nbsp;
+            <!-- <label><input type="radio" name="donate_source" id="donate_source_P" value="P">PayPal</label> -->
+            <label><input type="radio" name="donate_source" id="donate_source_G" value="G">Pledge</label>
+          </div>
+        </form>
+
+        <!-- bank form -->
+        <form role="form" id="form-B" class="payment-form hidden">
+          <div class="form-group">
+            <label for="name" class="control-label">Name on Account</label>
+            <input type="text" class="form-control" id="name" />
+          </div>
+          <div class="form-group">
+            <label for="routing_number" class="control-label">Routing Number</label>
+            <input type="text" class="form-control" id="routing_number" />
+          </div>
+          <div class="form-group">
+            <label for="account_number" class="control-label">Account Number</label>
+            <input type="text" class="form-control" id="account_number" />
+          </div>
+          <div class="form-group">
+          <label for="bankAcctType">Type</label>
+            <select>
+              <option value="checking">Checking</option>
+              <option value="savings">Savings</option>
+            </select>
+          </div>
+        </form>
+
+        <!-- credit card form -->
+        <form role="form" id="form-C" class="payment-form" >
+          <div class="form-group">
+            <label for="card_number" class="control-label">Card Number</label>
+            <input type="text" class="form-control" id="card_number" />
+          </div>
+          <div class="form-group">
+            <label for="expiration" class="control-label">Expiration</label>
+            <input name="expiration" class="form-control" id="card_exp" placeholder="mm/yyyy">
+          </div>
+          <div class="form-group">
+            <label for="security_code" class="control-label">Security Code</label>
+            <input type="text" class="form-control" id="card_cvc" />
+          </div>
+        </form>
+
+        <!-- Pledge instructions -->
+        <div class="payment-form hidden" id="form-G">
+          <p>Please provide a phone number at right. We will follow up within two business days.</p>
+        </div>
+      </div>
+
+      <div class="col-lg-4" id="master_donate_div">
+        <form id="master_donate_form" role="form">
+          {% csrf_token %}
+          {% bootstrap_form donation_form %}
+          {% bootstrap_form donor_form %}
+          <hr />
+          <p>All information entered here is private. You can add public information on the next page.</p>
+          <hr />
+          <button type="submit" class="btn btn-primary" id="submit_btn">
+            Submit
+          </button>
+          <div id="error_msg" class="alert alert-danger hidden" style="margin-top: 15px;">...</div>
+        </form>
+        <small>Donations processed via <a href="http://stripe.com">Stripe</a>.</small>
+      </div>
+    </div>    <div class="row">
+        <div class="col-lg-12">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-header">
+            <h1>Donors</h1>
+        </div>
+      </div>
+    </div>
+    {% for level_name, donors in all_donors.items %}
+    {% if donors %}
+    <div class="row">
+      <div class="col-lg-12">
+        <h2>{{ level_name }}</h2>
+      </div>
+    </div>
+    <div class="row">
+    {% for donor in donors %}
+      <div class="col-lg-4">
+        {% include "support/donor_acknowledgement.html" %}
+      </div>
+    {% if forloop.counter|divisibleby:3 %}
+    </div>
+  </br>
+    <div class="row">
+    {% endif %}
+    {% endfor %}
+    </div>
+  {% endif %}
+  {% endfor %}
+  {% endblock %}

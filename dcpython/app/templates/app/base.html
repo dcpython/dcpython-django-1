@@ -1,0 +1,97 @@
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block extra_head %}{% endblock extra_head %}
+
+    <title>{% block title %}Title{% endblock %}</title>
+
+    {% block stylesheets %}
+        {% bootstrap_css %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/dcpython.css" type="text/css">
+    {% endblock stylesheets %}
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', '{{ GOOGLE_ANALYTICS_ID }}', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+</head>
+<body class="{% block body_classes %}{% if PATH_HIERARCHY %}section-{{ PATH_HIERARCHY.0}}{% else %}homepage{% endif %}{% endblock body_classes %}">
+<div class="wrapper">
+    <div class="navbar navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/" rel="home">DC Python</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li {% if PATH_HIERARCHY|length == 0 %}class="active"{% endif %}><a href="{% url 'home' %}" rel="home">Home</a></li>
+            <li {% if PATH_HIERARCHY.0 == "events" %}class="active"{% endif %}><a href="{% url 'event-list' %}">Events</a></li>
+            <li {% if PATH_HIERARCHY.0 == "donate" %}class="active"{% endif %}><a href="{% url 'support' %}">Donate</a></li>
+            <!--<li {% if PATH_HIERARCHY.0 == "deals" %}class="active"{% endif %}><a href="/deals">Member Deals</a></li>-->
+            <li {% if PATH_HIERARCHY.0 == "blog" %}class="active"{% endif %}><a href="/blog/">Blog</a></li>
+            <li {% if PATH_HIERARCHY.0 == "resources" %}class="active"{% endif %}><a href="{% url 'resources' %}">Resources</a></li>
+            <li {% if PATH_HIERARCHY.0 == "about" %}class="active"{% endif %}><a href="{% url 'about' %}">About Us</a></li>
+            <li {% if PATH_HIERARCHY.0 == "contact" %}class="active"{% endif %}><a href="{% url 'contact' %}">Contact Us</a></li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+
+
+    {% block breadcrumbs-container %}
+        <div class="container">
+            <ol class="breadcrumb">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                {% block breadcrumbs %}
+                {% endblock breadcrumbs %}
+            </ol>
+        </div>
+    {% endblock breadcrumbs-container %}
+
+    {% block content %}{% endblock content %}
+
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+          <span class="social-buttons">
+              <ul>
+              <li><a href="https://twitter.com/dcpython" class="twitter-follow-button" data-show-count="true">Follow @dcpython</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></li>
+              <li>
+                  <iframe src="https://mdo.github.io/github-buttons/github-btn.html?user=DCPython&repo=dcpython-django&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
+              </li>
+              </ul>
+        </span>
+
+
+        <p>
+          &copy; 2008&ndash;{% now "Y" %} <a href="{% url 'legal' %}">ZPUGDC Inc</a>, a non-profit 501(c)(3) in Maryland, USA. All rights reserved.<br/>
+          Website proudly created with <a href="http://djangoproject.com" target="_blank">Django</a> by the <a href="http://meetup.com/DCPython">DC Python community</a>.<br/>
+          Website generously hosted by <a href="http://heroku.com/">Heroku</a> and <a href="http://www.rackspace.com/">Rackspace.</a>
+        </p>
+      </div>
+    </footer> <!-- /container -->
+
+
+
+    {% block javascript %}
+        {% bootstrap_javascript jquery=True %}
+    {% endblock javascript %}
+
+</body>
+</html>

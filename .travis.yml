@@ -1,0 +1,15 @@
+language: python
+
+notifications:
+  irc: "chat.freenode.net#dcpython"
+
+python:
+  - 2.7
+  - 3.4
+
+env:
+  - DJANGO_VERSION=1.6
+  - DJANGO_VERSION=1.7
+
+script:
+  python manage.py test

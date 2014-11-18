@@ -1,0 +1,50 @@
+{% load events_extras %}
+
+{# See http://schema.org/Event #}
+<div class="event" itemscope itemtype="http://schema.org/Event">
+    {% if not omit_title %}
+        <h3 itemprop="name"><a href="{{ event.get_absolute_url }}">{{ event.name }}</a></h3>
+    {% endif %}
+    {% if not omit_time %}
+        <h4>{% format_event_date event.start_time event.end_time %}</h4>
+    {% endif %}
+
+    {% if event.venue.name %}
+        <div itemprop="location" itemscope itemtype="http://schema.org/Place">
+            <address>
+                <strong itemprop="name">{{ event.venue.name }}</strong>
+                {% if event.venue.address_1 or event.venue.city %}
+                    <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                        <div itemprop="streetAddress">
+                            {{ event.venue.address_1 }}
+                            {% if event.venue.address_2 %}<br>{{ event.venue.address_2 }}{% endif %}
+                        </div>
+
+                        <span itemprop="addressLocality">{{ event.venue.city }}</span>,
+                        <span itemprop="addressRegion">{{ event.venue.state }}</span>
+                        <span itemprop="postalCode">{{ event.venue.zip }}</span>
+                        <span itemprop="addressContry">USA</span>
+                    </div>
+                {% endif %}
+            </address>
+        </div>
+    {% endif %}
+
+    {% if not omit_youtube %}
+        {% for playlist in event.playlists.all %}
+            <iframe width="560" height="315" src="//www.youtube.com/embed/videoseries?list={{ playlist.remote_id }}" frameborder="0" allowfullscreen></iframe>
+        {% endfor %}
+    {% endif %}
+
+    <div itemprop="description">
+        {% if truncate_description %}
+            {{ event.description|truncatewords_html:truncate_description|safe }}
+        {% else %}
+            {{ event.description|safe }}
+        {% endif %}
+    </div>
+
+    <p>
+        <a class="btn btn-default" itemprop="url" href="{{ event.get_absolute_url }}">View event »</a>
+    </p>
+</div>

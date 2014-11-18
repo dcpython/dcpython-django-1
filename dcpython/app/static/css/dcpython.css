@@ -1,0 +1,72 @@
+html, body{
+    height:100%;
+}
+
+.navbar .nav > li > a {
+    color:white;
+}
+
+.navbar .nav > li > a:hover {
+    color:lightgray;
+}
+
+.navbar-inverse .navbar-brand {
+    color:white;
+}
+
+.navbar {
+    background: #366C99;
+    border-radius: 0px;
+}
+
+.footer{
+    background-color: #f5f5f5;
+    border-top: 1px solid #cccccc;
+    color: gray;
+    height: 140px;
+    padding: 23px;
+}
+
+.homepage .jumbotron {
+    background-color: inherit;
+}
+
+.homepage #events time:before {
+    content: "(";
+}
+
+.homepage #events time:after {
+    content: ")";
+}
+
+.jumbotron {
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+.event > h3:first-child {
+    margin-top: 0;
+}
+
+.table time {
+    white-space: nowrap;
+}
+
+.social-buttons ul{
+    padding-left:0px;
+}
+
+.social-buttons li{
+    display: inline-block;
+    padding: 2px;
+    margin-right: -15px;
+    list-style-type: none;
+}
+
+.wrapper{
+    height: auto !important;
+    height: 100%;
+    padding: 0px 0 170px;
+    margin-bottom:-140px; /* height of footer */
+    min-height: 100%;
+}

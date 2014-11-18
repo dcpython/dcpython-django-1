@@ -1,0 +1,48 @@
+.donor_lvl {
+    background-color: red;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    height: 100px;
+    margin: 10px;
+    border: solid red 5px;
+}
+
+.donor_lvl:hover {
+    cursor: pointer;
+}
+
+.donor_lvl h1 {
+    font-size: 20px;
+    margin: 0px;
+    padding: 0px;
+}
+.donor_lvl h2 {
+    font-size: 15px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.platinum {
+    background-color: #f6fafa;
+    border: solid #f6fafa 5px;
+}
+.gold {
+    background-color: gold;
+    border: solid gold 5px;
+}
+.silver {
+    background-color: silver;
+    border: solid silver 5px;
+}
+.bronze {
+    background-color: #C69633;
+    border: solid #C69633 5px;
+}
+.donor_lvl.active {
+    border: solid black 5px;
+}
+
+.hidden {
+    visibility: hidden;
+}
