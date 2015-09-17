@@ -48,27 +48,13 @@ MANAGERS = ADMINS
 import dj_database_url
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dcpython',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': 'vagrant',
-        'PASSWORD': '1234',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': os.path.join(ROOT_DIR, 'dcpython.sqlite3'),  # Or path to database file if using sqlite3.
     }
 }
 
 if "DATABASE_URL" in os.environ:
     DATABASES['default'] = dj_database_url.config()
-
-try:
-    import sys
-    print("Creating sqlite test database")
-    if 'test' in sys.argv:
-        DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3'}
-except ImportError:
-    print("Tried to set up test database, but sys module could not be imported")
-
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

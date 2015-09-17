@@ -30,26 +30,15 @@ Clone your copy of github repository to your working directory (replace <your-us
     $ git clone git@github.com:<your-username>/dcpython-django.git
     $ cd dcpython-django
 
-Install Vagrant caching plugin::
-
-    $ vagrant plugin install vagrant-cachier
-
 Start the vagrant environment::
 
     $ vagrant up
 
-YOU WILL GET HUGE RED ERRORS: check to ensure this is a permissions issue with postgres, then continue with these instructions
-TODO - please help me fix this bug!
-
-Log into the vagrant vm::
-
-    $ vagrant ssh
-    $ cd /vagrant
-    $ sh config_db.sh
-
 Start the django server::
 
-    $ foreman start
+    $ heroku local
+
+Heroku will install a bunch of stuff the first time you run this command, then it will start a dev server.
 
 You can now visit the Django site at http://localhost:5000
 
@@ -77,7 +66,7 @@ From the vagrant ssh command line
 Start django::
 
     $ cd /vagrant
-    $ foreman start
+    $ heroku local
 
 Django manage.py::
 

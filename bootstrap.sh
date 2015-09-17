@@ -1,11 +1,6 @@
 #!/bin/sh
 export PYTHONPATH=$PYTHONPATH:/vagrant
 
-# set utf locale for postgres
-export LANGUAGE="en_US.UTF-8"
-export LANG="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
-
 # update everything
 sudo apt-get update
 sudo apt-get upgrade
@@ -32,13 +27,8 @@ sudo python3.4 -m ensurepip
 echo "*** installing requirements for python3.4, using pip3"
 sudo pip3 install -r /vagrant/requirements.txt
 
-# have to properly set locale for postgres setup
-
-# sudo -u postgres pg_createcluster --start -e UTF-8 9.1 main
-# sudo -u postgres pg_createcluster --start -e UTF-8 --locale=en_US.UTF8 9.1 main
-
-# setup postgresql
-sudo -u postgres createuser --superuser vagrant
-sudo -u postgres psql -c "alter user postgres with password '1234';"
-sudo -u postgres psql -c 'CREATE DATABASE dcpython;'
-/vagrant/config_db.sh
+# setup database
+/vagrant/manage.py syncdb
+/vagrant/manage.py migrate
+/vagrant/manage.py loaddata /vagrant/dcpython/app/fixtures/debug_data.json
+/vagrant/manage.py loaddata /vagrant/dcpython/events/fixtures/debug_data.json

@@ -1,6 +1,7 @@
 *.py[cod]
 .*
 staticfiles
+dcpython/dcpython.sqlite3
 
 # C extensions
 *.so
