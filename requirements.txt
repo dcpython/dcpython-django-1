@@ -11,7 +11,6 @@ google-api-python-client==1.2
 Pillow==2.5.0
 python-dateutil==2.1
 django-localflavor==1.0
-South==0.8.2
 stripe==1.11.0
 six==1.7.3
 pyrax==1.8.1 # 1.8.2 has bug that prevents cumulus working with ssl
