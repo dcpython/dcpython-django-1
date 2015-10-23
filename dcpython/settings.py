@@ -164,6 +164,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'dcpython.app.context_processors.path_hierarchy',
     'dcpython.app.context_processors.google_analytics',
+    # allauth specific context processors
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount",
 )
 
 INSTALLED_APPS = [
@@ -186,11 +189,22 @@ INSTALLED_APPS = [
     'localflavor',
     'django_extensions',
     'pagedown',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 ]
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+)
+
+LOGIN_REDIRECT_URL = '/'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

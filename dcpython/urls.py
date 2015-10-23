@@ -12,9 +12,12 @@ urlpatterns = patterns('',
     url(r'^blog/', include("dcpython.blog.urls")),
     # FIXME: refactor all donation views into support/urls.py, consider renaming app
     url(r'^donate/$', 'dcpython.support.views.support', name='support'),
-    url(r'^andrew-w-singer.html', 'dcpython.support.views.andrew_w_singer', name='andrew_w_singer'),
-    url(r'^donor/(?P<secret>[\w\-_]+=?=?=?)/$', 'dcpython.support.views.donor_update', name='donor_update'),
-    url(r'^make_donation$', 'dcpython.support.views.make_donation', name='make_donation'),
+    url(r'^andrew-w-singer.html', 'dcpython.support.views.andrew_w_singer',
+        name='andrew_w_singer'),
+    url(r'^donor/(?P<secret>[\w\-_]+=?=?=?)/$',
+        'dcpython.support.views.donor_update', name='donor_update'),
+    url(r'^make_donation$', 'dcpython.support.views.make_donation',
+        name='make_donation'),
     url(r'^about/$', 'dcpython.app.views.about', name='about'),
     url(r'^deals/$', 'dcpython.app.views.deals', name='deals'),
     url(r'^resources/$', 'dcpython.app.views.resources', name='resources'),
@@ -25,6 +28,11 @@ urlpatterns = patterns('',
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+
+    # Django all-auth
+    (r'^accounts/logout/$', 'django.contrib.auth.views.logout',
+             {'next_page': '/'}),  # No confirmation when signing out
+    (r'^accounts/', include('allauth.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
 )
