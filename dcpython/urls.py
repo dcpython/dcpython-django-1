@@ -1,34 +1,21 @@
-from django.conf.urls import patterns, include, url
+"""dcpython URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/1.8/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+Including another URLconf
+    1. Add an import:  from blog import urls as blog_urls
+    2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
+"""
+from django.conf.urls import include, url
 from django.contrib import admin
-from django.conf import settings
 
-admin.autodiscover()
-
-urls = ()
-
-urlpatterns = patterns('',
-    url(r'^$', 'dcpython.app.views.home', name='home'),
-    url(r'^events/', include("dcpython.events.urls")),
-    url(r'^blog/', include("dcpython.blog.urls")),
-    # FIXME: refactor all donation views into support/urls.py, consider renaming app
-    url(r'^donate/$', 'dcpython.support.views.support', name='support'),
-    url(r'^andrew-w-singer.html', 'dcpython.support.views.andrew_w_singer', name='andrew_w_singer'),
-    url(r'^donor/(?P<secret>[\w\-_]+=?=?=?)/$', 'dcpython.support.views.donor_update', name='donor_update'),
-    url(r'^make_donation$', 'dcpython.support.views.make_donation', name='make_donation'),
-    url(r'^about/$', 'dcpython.app.views.about', name='about'),
-    url(r'^deals/$', 'dcpython.app.views.deals', name='deals'),
-    url(r'^resources/$', 'dcpython.app.views.resources', name='resources'),
-    url(r'^legal/$', 'dcpython.app.views.legal', name='legal'),
-    url(r'^contact/$', 'dcpython.app.views.contact', name='contact'),
-    # url(r'^$', 'dcpython.views.home', name='home'),
-    # url(r'^dcpython/', include('dcpython.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
+urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-)
-
-if settings.DEBUG:
-    from django.conf.urls.static import static
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
