@@ -1,6 +1,8 @@
 DC Python Website
 =================
 
+.. image:: screenshot.png
+
 ..
     About
     -----
