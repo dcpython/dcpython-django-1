@@ -1,5 +1,5 @@
-DCPython Website
-================
+DC Python Website
+=================
 
 ..
     About
