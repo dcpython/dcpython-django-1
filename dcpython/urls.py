@@ -19,6 +19,8 @@ from django.contrib import admin
 from dcpython.app import views
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
+    url(r'^$',
+        views.home,
+        name='home'),
     url(r'^admin/', include(admin.site.urls)),
 ]

@@ -6,5 +6,7 @@ heroku:
 	git push heroku master
 
 lint:
+	yapf -i dcpython/*.py
 	yapf -i dcpython/*/*.py
+#	flake8 dcpython/*.py
 #	flake8 dcpython/*/*.py
