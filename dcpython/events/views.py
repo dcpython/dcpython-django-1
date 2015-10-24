@@ -10,9 +10,7 @@ def event_list(request):
     past = Event.objects.past()
     years = Event.objects.datetimes('start_time', 'year', order="DESC")
 
-    ctx = {"upcoming": upcoming,
-           "past": past,
-           'archive_years': years}
+    ctx = {"upcoming": upcoming, "past": past, 'archive_years': years}
 
     return render(request, 'events/event_list.html', ctx)
 

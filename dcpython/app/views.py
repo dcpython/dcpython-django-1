@@ -25,7 +25,6 @@
 #def contact(request):
 #    return render(request, 'app/contact.html')
 
-
 from django.shortcuts import render
 
 

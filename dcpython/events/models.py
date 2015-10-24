@@ -53,11 +53,13 @@ class EventManager(models.Manager):
 
     def upcoming(self):
         i = now()
-        return self.filter(Q(start_time__gte=i) | Q(end_time__isnull=False, end_time__gte=i))
+        return self.filter(Q(start_time__gte=i) | Q(end_time__isnull=False,
+                                                    end_time__gte=i))
 
     def past(self):
         i = now()
-        return self.filter(start_time__lt=i).filter(Q(end_time__lt=i) | Q(end_time__isnull=True))
+        return self.filter(start_time__lt=i).filter(Q(end_time__lt=i) | Q(
+            end_time__isnull=True))
 
 
 class Event(models.Model):
@@ -109,7 +111,8 @@ class Event(models.Model):
             event.save()
 
     def get_absolute_url(self):
-        return reverse('event-detail', kwargs={'slug': self.slug,
-                                               'year': self.local_start_time.year,
-                                               'month': self.local_start_time.month,
-                                               'day': self.local_start_time.day})
+        return reverse('event-detail',
+                       kwargs={'slug': self.slug,
+                               'year': self.local_start_time.year,
+                               'month': self.local_start_time.month,
+                               'day': self.local_start_time.day})

@@ -4,7 +4,6 @@ from django.core.urlresolvers import reverse
 
 
 class DCPythonTest(TestCase):
-
     def setUp(self):
         self.c = Client()
 

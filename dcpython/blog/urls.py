@@ -4,10 +4,11 @@ from dcpython.blog.rss import BlogFeed
 from django.conf.urls import patterns, url
 from dcpython.blog.views import PostYearArchiveView, PostMonthArchiveView, PostDetail
 
-
-urlpatterns = patterns('dcpython.blog.views',
-    url(r'^$', 'blog', name='blog'),
-
+urlpatterns = patterns(
+    'dcpython.blog.views',
+    url(r'^$',
+        'blog',
+        name='blog'),
     url(r'^(?P<year>\d{4})/$',
         PostYearArchiveView.as_view(),
         name="post-year-archive"),
@@ -17,5 +18,4 @@ urlpatterns = patterns('dcpython.blog.views',
     url(r'^(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{1,2})/(?P<slug>[^/]+)/$',
         PostDetail.as_view(),
         name="post-detail"),
-    url(r'^feed/$', BlogFeed())
-)
+    url(r'^feed/$', BlogFeed()))

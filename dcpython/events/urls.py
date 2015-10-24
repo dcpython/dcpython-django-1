@@ -4,10 +4,11 @@ from django.conf.urls import patterns, url
 
 from dcpython.events.views import EventYearArchiveView, EventMonthArchiveView, EventDetail
 
-
-urlpatterns = patterns('dcpython.events.views',
-    url(r'^$', 'event_list', name='event-list'),
-
+urlpatterns = patterns(
+    'dcpython.events.views',
+    url(r'^$',
+        'event_list',
+        name='event-list'),
     url(r'^(?P<year>\d{4})/$',
         EventYearArchiveView.as_view(),
         name="event-year-archive"),
@@ -16,5 +17,4 @@ urlpatterns = patterns('dcpython.events.views',
         name="event-month-archive"),
     url(r'^(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{1,2})/(?P<slug>[^/]+)/$',
         EventDetail.as_view(),
-        name="event-detail"),
-)
+        name="event-detail"), )

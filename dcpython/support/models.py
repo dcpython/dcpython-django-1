@@ -25,35 +25,23 @@ else:
     from django.core.files.storage import FileSystemStorage
     storage = FileSystemStorage()
 
-LEVEL_DATA = (
-    ("A", "Andrew W. Singer Memorial Level", 2500),
-    ("P", "Platinum", 1000),
-    ("G", "Gold", 500),
-    ("S", "Silver", 250),
-    ("B", "Bronze", 100),
-    ("I", "Individual", 50),
-    ("O", "Other", 0)
-)
+LEVEL_DATA = (("A", "Andrew W. Singer Memorial Level", 2500),
+              ("P", "Platinum", 1000), ("G", "Gold", 500),
+              ("S", "Silver", 250), ("B", "Bronze", 100),
+              ("I", "Individual", 50), ("O", "Other", 0))
 
-DONOR_LEVELS = [(code, "{} (${})".format(name, value),) for code, name, value in LEVEL_DATA]
+DONOR_LEVELS = [(code,
+                 "{} (${})".format(name, value), )
+                for code, name, value in LEVEL_DATA]
 
-DL_INDEX = {
-    'A': 0,
-    'P': 1,
-    'G': 2,
-    'S': 3,
-    'B': 4,
-    'I': 5,
-    'O': 6,
-    None: 7,
-}
+DL_INDEX = {'A': 0, 'P': 1, 'G': 2, 'S': 3, 'B': 4, 'I': 5, 'O': 6, None: 7, }
 
 DONATION_TYPES = (
-#    ("B", "Bank Account"),
+    #    ("B", "Bank Account"),
     ("C", "Credit Card"),
-#    ("P", "PayPal"),
-    ("G", "Pledge"),
-)
+    #    ("P", "PayPal"),
+    ("G", "Pledge"), )
+
 
 class DonorManager(models.Manager):
     def active(self):
@@ -68,8 +56,9 @@ class DonorManager(models.Manager):
         donors = self.active()
         bag = []
         for donor in donors:
-            bag += donor.get_level()[2]/50 * [donor]
+            bag += donor.get_level()[2] / 50 * [donor]
         return random.choice(bag) if bag else None
+
 
 class Donor(models.Model):
     """
@@ -77,18 +66,41 @@ class Donor(models.Model):
     """
     email = models.EmailField()
     phone = PhoneNumberField(blank=True, null=True)
-    name = models.CharField(max_length=100, help_text="If institutional donation, point of contact's name")
+    name = models.CharField(
+        max_length=100,
+        help_text="If institutional donation, point of contact's name")
 
-    public_name = models.CharField(max_length=100, verbose_name="Display Name", blank=True, null=True)
-    public_url = models.URLField(blank=True, null=True, verbose_name="Display Url")
-    public_slogan = models.CharField(max_length=200, verbose_name="Display Slogan", blank=True, null=True)
-    public_logo = models.ImageField(storage=storage, upload_to="donor_logos", verbose_name="Display Logo", blank=True, null=True)
+    public_name = models.CharField(max_length=100,
+                                   verbose_name="Display Name",
+                                   blank=True,
+                                   null=True)
+    public_url = models.URLField(blank=True,
+                                 null=True,
+                                 verbose_name="Display Url")
+    public_slogan = models.CharField(max_length=200,
+                                     verbose_name="Display Slogan",
+                                     blank=True,
+                                     null=True)
+    public_logo = models.ImageField(storage=storage,
+                                    upload_to="donor_logos",
+                                    verbose_name="Display Logo",
+                                    blank=True,
+                                    null=True)
 
-
-    level = models.CharField(max_length=1, choices=DONOR_LEVELS, blank=True, null=True, help_text="Override levels specified by donations if not past 'valid until'")
+    level = models.CharField(
+        max_length=1,
+        choices=DONOR_LEVELS,
+        blank=True,
+        null=True,
+        help_text=
+        "Override levels specified by donations if not past 'valid until'")
     secret = models.CharField(max_length=90)
     reviewed = models.BooleanField(default=False)
-    valid_until = models.DateField(blank=True, null=True, help_text="Specify a date until which the level specified for the donor is valid. After, donation levels will control.")
+    valid_until = models.DateField(
+        blank=True,
+        null=True,
+        help_text=
+        "Specify a date until which the level specified for the donor is valid. After, donation levels will control.")
 
     objects = DonorManager()
 
@@ -105,7 +117,9 @@ class Donor(models.Model):
             image = self.logoIO
             valid_image = self.process_image(image)
             if valid_image != image:
-                self.public_logo.save("{}.png".format(self.pk), valid_image, save=False)
+                self.public_logo.save("{}.png".format(self.pk),
+                                      valid_image,
+                                      save=False)
         # if self.public_logo:
         #     self.public_logo = self.process_image(self.public_logo.file)
         super(Donor, self).save(*args, **kwargs)
@@ -120,7 +134,9 @@ class Donor(models.Model):
         image = Image.open(f)
         width, height = image.size
 
-        if height <= 450 and imghdr.what(f) in ['png', 'gif', 'jpeg'] and 1.0*width/height >= 16.0/9:
+        if height <= 450 and imghdr.what(f) in [
+                'png', 'gif', 'jpeg'
+        ] and 1.0 * width / height >= 16.0 / 9:
             return f
 
         # ensure no more than 450x800
@@ -129,10 +145,10 @@ class Donor(models.Model):
             width, height = image.size
 
         # ensure no more than 16:9 aspect ratio
-        if 1.0*width/height < 16.0/9:
-            new_width = height*16/9
+        if 1.0 * width / height < 16.0 / 9:
+            new_width = height * 16 / 9
             new_image = Image.new('RGBA', (new_width, height))
-            x = (new_width - width)/2
+            x = (new_width - width) / 2
             y = 0
             new_image.paste(image, (x, y, x + width, y + height))
             image = new_image
@@ -146,24 +162,29 @@ class Donor(models.Model):
 
     def get_level(self):
         """ return the current donor level - it is the donor's level if exists and unexpired or the highest active donation level"""
-        if self.level and self.valid_until and self.valid_until >= date.today():
+        if self.level and self.valid_until and self.valid_until >= date.today(
+        ):
             return LEVEL_DATA[DL_INDEX[self.level]]
 
         level = DL_INDEX[None]
-        for donation in self.donations.filter(reviewed=True, valid_until__gte=date.today()):
+        for donation in self.donations.filter(reviewed=True,
+                                              valid_until__gte=date.today()):
             level = min(level, DL_INDEX[donation.level])
 
         return LEVEL_DATA[level] if level != DL_INDEX[None] else None
 
     def pending(self):
         """ return whether the donor or one of their donations is pending review """
-        return not self.reviewed or self.donations.filter(reviewed=False).count()
+        return not self.reviewed or self.donations.filter(
+            reviewed=False).count()
 
     def __unicode__(self):
         if self.public_name:
-            return u"{} (contact: {}, {})".format(self.public_name, self.name, self.email)
+            return u"{} (contact: {}, {})".format(self.public_name, self.name,
+                                                  self.email)
         else:
             return u"{} ({})".format(self.name, self.email)
+
 
 class Donation(models.Model):
     """
@@ -177,7 +198,10 @@ class Donation(models.Model):
     transaction_id = models.CharField(max_length=50)
 
     valid_until = models.DateField(blank=True, null=True)
-    level = models.CharField(max_length=1, choices=DONOR_LEVELS, blank=True, null=True)
+    level = models.CharField(max_length=1,
+                             choices=DONOR_LEVELS,
+                             blank=True,
+                             null=True)
     reviewed = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
@@ -189,4 +213,6 @@ class Donation(models.Model):
         super(Donation, self).save(*args, **kwargs)
 
     def __unicode__(self):
-        return u"${} donation from {} on {}".format(self.donation, self.donor.public_name or self.donor.name, self.datetime)
+        return u"${} donation from {} on {}".format(
+            self.donation, self.donor.public_name or self.donor.name,
+            self.datetime)

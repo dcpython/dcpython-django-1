@@ -6,12 +6,12 @@ from django.views.generic.dates import YearArchiveView, MonthArchiveView, DateDe
 import datetime
 from django.utils.timezone import get_current_timezone
 
+
 def blog(request):
     posts = Post.objects.published()[:5]
     years = Post.objects.datetimes('published', 'year', order="DESC")
 
-    ctx = {"posts": posts,
-           'archive_years': years}
+    ctx = {"posts": posts, 'archive_years': years}
 
     return render(request, 'blog/blog.html', ctx)
 
@@ -36,7 +36,10 @@ class PostDetail(DateDetailView):
     def get_object(self, queryset=None):
         tz = get_current_timezone()
         qs = queryset if queryset is not None else self.get_queryset()
-        day_start = datetime.datetime(int(self.kwargs['year']), int(self.kwargs['month']), int(self.kwargs['day']))
+        day_start = datetime.datetime(
+            int(self.kwargs['year']), int(self.kwargs['month']),
+            int(self.kwargs['day']))
         day_end = datetime.datetime.combine(day_start, datetime.time.max)
         return qs.get(slug=self.kwargs['slug'],
-                      published__range=(day_start, day_end,))
+                      published__range=(day_start,
+                                        day_end, ))

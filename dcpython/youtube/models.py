@@ -28,11 +28,10 @@ class PlaylistManager(models.Manager):
                 continue
 
             remote_id = entry.id.split('/')[-1]
-            defaults = {
-                'event': event,
-                'updated': entry.updated,
-            }
-            playlist, created = Playlist.objects.get_or_create(remote_id=remote_id, defaults=defaults)
+            defaults = {'event': event, 'updated': entry.updated, }
+            playlist, created = Playlist.objects.get_or_create(
+                remote_id=remote_id,
+                defaults=defaults)
 
             if created:
                 continue
@@ -42,10 +41,13 @@ class PlaylistManager(models.Manager):
             playlist.updated = entry.updated
             playlist.save()
 
-        last_synced, created = ServiceSync.objects.get_or_create(service=url, defaults={'last_synced': feed.feed.updated})
+        last_synced, created = ServiceSync.objects.get_or_create(
+            service=url,
+            defaults={'last_synced': feed.feed.updated})
         if not created:
             last_synced.last_synced = feed.feed.updated
             last_synced.save()
+
 
 class Playlist(models.Model):
     event = models.ForeignKey(Event, related_name='playlists')

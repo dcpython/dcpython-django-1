@@ -5,11 +5,13 @@ from django.utils.text import slugify
 from markupfield.fields import MarkupField
 from django.utils import timezone
 
+
 class PostManager(models.Manager):
     use_for_related = True
 
     def published(self):
         return self.filter(published__lt=now())
+
 
 class Post(models.Model):
     """
@@ -32,10 +34,11 @@ class Post(models.Model):
         return self.published.astimezone(current_tz)
 
     def get_absolute_url(self):
-        return reverse('post-detail', kwargs={'slug': self.slug,
-                                               'year': self.local_published.year,
-                                               'month': self.local_published.month,
-                                               'day': self.local_published.day})
+        return reverse('post-detail',
+                       kwargs={'slug': self.slug,
+                               'year': self.local_published.year,
+                               'month': self.local_published.month,
+                               'day': self.local_published.day})
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
@@ -48,6 +51,6 @@ class Post(models.Model):
         super(Post, self).save(*args, **kwargs)
 
     class Meta:
-        ordering = ('-published',)
+        ordering = ('-published', )
         get_latest_by = 'published'
         unique_together = (('published', 'slug'))
