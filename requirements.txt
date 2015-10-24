@@ -8,7 +8,7 @@ static==1.1.1
 django-bootstrap3==4.11.0
 UniversalClient==0.5.2
 google-api-python-client==1.2
-Pillow==2.5.0
+Pillow==3.0.0
 python-dateutil==2.1
 django-localflavor==1.0
 stripe==1.11.0
