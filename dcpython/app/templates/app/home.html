@@ -19,7 +19,6 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
-
     <!-- Custom styles for this template -->
     <style>
         body {
@@ -48,6 +47,7 @@
         }
         .navbar, .nav {
             background: white;
+            height: 65px;
         }
         .navbar-brand:hover {
             color: #333333 !important;
@@ -69,7 +69,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="{% url 'home' %}">DC Python</a>
+          <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'img/dcpython-logo-small.png' %}"></a>
         </div>
         </div><!--/.nav-collapse -->
       </div>
