@@ -36,7 +36,7 @@
             padding: 40px 15px;
             text-align: center;
         }
-        ul {
+        .branding ul {
             list-style: none;
             text-align: left;
         }
@@ -52,8 +52,8 @@
         .navbar-brand:hover {
             color: #333333 !important;
         }
-        img {
-            margin: 5px;
+        .aws {
+            margin-right: 15px;
         }
     </style>
 
@@ -69,12 +69,6 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
           <a class="navbar-brand" href="{% url 'home' %}">DC Python</a>
         </div>
         </div><!--/.nav-collapse -->
@@ -151,17 +145,16 @@
 
         {% endblock %}
 
-    </div><!-- /.container -->
+    <hr>
 
-    <div class="container">
-        <hr>
-        <div class="footer">
-            <div class="row">
-                <p class="pull-left">&copy; Copyright 2015, DC Python</p>
-                <p class="pull-right">In memory of <a href="{% url 'aws' %}">Andrew W. Singer</a></p>
-            </div>
+    <div class="footer">
+        <div class="row">
+            <p class="pull-left">&copy; Copyright 2015, DC Python</p>
+            <p class="pull-right">In memory of <a href="{% url 'aws' %}">Andrew W. Singer</a></p>
         </div>
     </div>
+
+    </div><!-- /.container -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
