@@ -22,5 +22,8 @@ urlpatterns = [
     url(r'^$',
         views.home,
         name='home'),
+    url(r'^andrew-w-singer.html',
+        views.aws,
+        name='aws'),
     url(r'^admin/', include(admin.site.urls)),
 ]

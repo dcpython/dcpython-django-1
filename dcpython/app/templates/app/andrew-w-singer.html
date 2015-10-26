@@ -1,11 +1,5 @@
-{% extends "app/base.html" %}
-{% load bootstrap3 %}
-
-{% block title %}In Memory of Andrew W. Singer{% endblock %}
-
-{% block breadcrumbs %}
-    <li class="active">Andrew W. Singer</li>
-{% endblock %}
+{% extends "app/home.html" %}
+{% load staticfiles %}
 
 {% block content %}
 
@@ -19,8 +13,9 @@
     </div>
     <div class="row">
       <div class="col-lg-12">
+        <img class="img-thumbnail pull-left" alt="Andrew W. Singer" src="{% static 'img/andrew-w-singer.jpg' %}">
         <p>
-            <img class="img-thumbnail" style="float: left; padding: 5px; margin: 5px" alt="Andrew W. Singer" src="{{ STATIC_URL }}img/andrew-w-singer.jpg">On January 7, 2013 Andrew W. Singer ("Andy") passed away from cancer in California. This is a significant milestone for DC Python, because Andy played an enormous role in the successful completion and acceptance of our 501(c)(3) non-profit application.
+On January 7, 2013 Andrew W. Singer ("Andy") passed away from cancer in California. This is a significant milestone for DC Python, because Andy played an enormous role in the successful completion and acceptance of our 501(c)(3) non-profit application.
         </p>
         <p>
             The only person to contribute more was our secretary and treasurer Amy Clark; and while she was not a University of Pennsylvania Wharton School of Business undergraduate or a graduate in the top 2% of Harvard Law School; or a tax attorney with decades of experience from Covington & Burling, an extremely prestigious law firm headquartered in Washington, D.C., Andy was all of these --and much more. He volunteered endless hours of legal guidance and consultation to Amy, and skillfully authored our entire application. Amy compiled, organized and submitted this formidable application, and as a result of her tireless efforts and his expertise, it was approved and accepted on first submission without complication or question.

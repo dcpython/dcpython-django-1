@@ -27,6 +27,8 @@
 
 from django.shortcuts import render
 
+def aws(request):
+    return render(request, 'app/andrew-w-singer.html')
 
 def home(request):
     return render(request, 'app/home.html')
