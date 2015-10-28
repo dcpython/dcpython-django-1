@@ -19,5 +19,5 @@ pyrax==1.8.1 # 1.8.2 has bug that prevents cumulus working with ssl
 python-dateutil==2.1
 six==1.7.3
 static==1.1.1
-stripe==1.11.0
+stripe==1.27.1
 whitenoise==2.0.4
