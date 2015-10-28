@@ -1,5 +1,8 @@
 lint: yapf flake
 
+static:
+	python manage.py collectstatic
+
 yapf:
 	yapf -i dcpython/*.py
 	yapf -i dcpython/*/*.py
