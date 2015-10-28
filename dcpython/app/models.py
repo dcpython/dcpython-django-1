@@ -11,3 +11,6 @@ class ServiceSync(models.Model):
     """
     service = models.CharField(max_length=200)
     last_synced = models.CharField(max_length=50)
+
+class Meta:
+    db_table = 'auth_user'
