@@ -51,12 +51,13 @@ class DonorManager(models.Manager):
         # it is quite possible this query does not actually do what I hope
         # it does.
 
-        return self.filter(reviewed=True) \
-                   .filter(Q(valid_until__gte=date.today()) |
-                           Q(donations__valid_until__gte=date.today(), donations__reviewed=True))
+        return self.filter(reviewed=True).filter(Q(valid_until__gte=date.today(
+        )) | Q(donations__valid_until__gte=date.today(),
+               donations__reviewed=True))
 
     def random(self):
-        """ return one active donor chosen at random, weighted by their level's minimum donation amount """
+        """ return one active donor chosen at random,
+        weighted by their level's minimum donation amount """
         donors = self.active()
         bag = []
         for donor in donors:
@@ -91,21 +92,18 @@ class Donor(models.Model):
                                     blank=True,
                                     null=True)
 
-    level = models.CharField(
-        max_length=1,
-        choices=DONOR_LEVELS,
-        blank=True,
-        null=True,
-        help_text=
-        "Override levels specified by donations if not past 'valid until'")
+    help_text = "Override levels specified by donations if not past "
+    help_text += "'valid until'"
+    level = models.CharField(max_length=1,
+                             choices=DONOR_LEVELS,
+                             blank=True,
+                             null=True,
+                             help_text=help_text)
     secret = models.CharField(max_length=90)
     reviewed = models.BooleanField(default=False)
-    valid_until = models.DateField(
-        blank=True,
-        null=True,
-        help_text=
-        "Specify a date until which the level specified for the donor is valid. After, donation levels will control.")
-
+    help_text = "Specify a date until which the level specified for the donor"
+    help_text += " is valid. After, donation levels will control."
+    valid_until = models.DateField(blank=True, null=True, help_text=help_text)
     objects = DonorManager()
 
     @property
@@ -165,7 +163,8 @@ class Donor(models.Model):
         return f
 
     def get_level(self):
-        """ return the current donor level - it is the donor's level if exists and unexpired or the highest active donation level"""
+        """ return the current donor level - it is the donor's level if exists
+        and unexpired or the highest active donation level"""
         if self.level and self.valid_until and self.valid_until >= date.today(
         ):
             return LEVEL_DATA[DL_INDEX[self.level]]
@@ -178,7 +177,8 @@ class Donor(models.Model):
         return LEVEL_DATA[level] if level != DL_INDEX[None] else None
 
     def pending(self):
-        """ return whether the donor or one of their donations is pending review """
+        """ return whether the donor or one of their donations is pending
+        review """
         return not self.reviewed or self.donations.filter(
             reviewed=False).count()
 

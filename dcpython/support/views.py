@@ -28,7 +28,7 @@ def support(request):
     all_donors = Donor.objects.active()
     context = RequestContext(request)
 
-    #Pairs like ("Platnum", [donor_obj])
+    # Pairs like ("Platnum", [donor_obj])
     all_sorted_donors = OrderedDict([(level[1], []) for level in LEVEL_DATA])
 
     for donor in all_donors:
@@ -51,7 +51,8 @@ def donor_update(request, secret=None):
                                       instance=donor)
         if form.is_valid() and public_form.is_valid():
             donor = form.save()
-            # public_form = PublicDonorForm(request.POST, request.FILES, instance=donor)
+            # public_form = PublicDonorForm(request.POST,
+            # request.FILES, instance=donor)
             donor = public_form.save()
     else:
         form = DonorForm(instance=donor)
@@ -96,10 +97,11 @@ def make_donation(request):
 
     if donation_type == "C":
 
-        # Create the charge on Stripe's servers - this will charge the user's card
+        # Create the charge on Stripe's servers - this will charge the user's
+        # card
         try:
             resp = stripe.Charge.create(
-                amount=donation_amount*100, # amount in cents, again
+                amount=donation_amount*100,  # amount in cents, again
                 currency="usd",
                 card=donation_data['cc_token'],
                 description=donor_data['email']
@@ -129,8 +131,7 @@ def make_donation(request):
                             donation=donation_amount)
         donation.save()
 
-    body = \
-"""
+    body = """
 Dear {},
 
 Thank you for your generous {} of ${} DCPython.
@@ -141,13 +142,11 @@ http://dcpython.org/donor/{}
 
 {}
 
-Best,
-
-Alex Clark
-President, DCPython
+Alex Clark, President & Executive Director of DC Python
 """
 
-    donation = 'We will process your donation shortly. It may take several days before it is reflected on the website.'
+    donation = 'We will process your donation shortly. It may take '
+    donation += 'several days before it is reflected on the website.'
     pledge = 'We will contact you shortly regarding your pledge.'
     body = body.format(donor.name, 'pledge' if donation_type == 'G' else
                        'donation', donation_amount, donor.secret, pledge if

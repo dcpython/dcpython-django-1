@@ -1,10 +1,3 @@
-update: github heroku
-github:
-	git commit -a -m "Update"
-	git push
-heroku:
-	git push heroku master
-
 lint: yapf flake
 
 yapf:
@@ -14,3 +7,12 @@ yapf:
 flake:
 	flake8 dcpython/*.py
 	flake8 dcpython/*/*.py
+
+push: github heroku
+
+github:
+	git commit -a -m "Update"
+	git push
+heroku:
+	git push heroku master
+
