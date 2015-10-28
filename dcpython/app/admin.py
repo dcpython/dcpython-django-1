@@ -36,8 +36,8 @@
 #
 # admin.site.register(User, MyUserAdmin)
 
+from .models import Donor, Donation
 from django.contrib import admin
-from dcpython.support.models import Donor, Donation
 from django.contrib.admin import SimpleListFilter
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Q
