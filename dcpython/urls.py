@@ -29,4 +29,14 @@ urlpatterns = [
         views.donate,
         name='donate'),
     url(r'^admin/', include(admin.site.urls)),
+    #    url(r'^(?P<year>\d{4})/$',
+    #        views.EventYearArchiveView.as_view(),
+    #        name="event-year-archive"),
+    #    url(r'^(?P<year>\d{4})/(?P<month>\d{1,2})/$',
+    #        views.EventMonthArchiveView.as_view(month_format='%m'),
+    #        name="event-month-archive"),
+    #    url(r'^(?P<year>\d{4})/(?P<month>\d{1,2})/(?P<day>\d{1,2})/' +
+    #        '(?P<slug>[^/]+)/$',
+    #        views.EventDetail.as_view(),
+    #        name="event-detail"), )
 ]
