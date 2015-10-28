@@ -19,7 +19,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', '126z-ga#rwf3e++9pryq$w6_8b_@)880tj5yjbupk#jio032+*')
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY', '126z-ga#rwf3e++9pryq$w6_8b_@)880tj5yjbupk#jio032+*')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -70,7 +71,9 @@ WSGI_APPLICATION = 'dcpython.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 import dj_database_url
-DATABASES = {'default': dj_database_url.config(default=os.environ.get('HEROKU_POSTGRESQL_BRONZE_URL', 'postgres://USER:PASSWORD@HOST:PORT/NAME'))}
+DATABASES = {'default': dj_database_url.config(default=os.environ.get(
+    'HEROKU_POSTGRESQL_BRONZE_URL', 'postgres://%s:@localhost:5432/dcpython' %
+    os.environ.get('USER', '')))}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
