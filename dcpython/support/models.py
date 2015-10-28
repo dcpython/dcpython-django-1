@@ -45,10 +45,14 @@ DONATION_TYPES = (
 
 class DonorManager(models.Manager):
     def active(self):
-        """ return all active donors - that is donors who have been reviewed and have at least one valid, reviwed donation """
-        # it is quite possible this query does not actually do what I hope it does.
+        """ return all active donors - that is donors who have been reviewed
+        and have at least one valid, reviwed donation """
+
+        # it is quite possible this query does not actually do what I hope
+        # it does.
+
         return self.filter(reviewed=True) \
-                   .filter(Q(valid_until__gte=date.today()) | \
+                   .filter(Q(valid_until__gte=date.today()) |
                            Q(donations__valid_until__gte=date.today(), donations__reviewed=True))
 
     def random(self):

@@ -10,7 +10,8 @@ from django.utils.text import slugify
 from django.utils.timezone import now
 from django.utils import timezone
 
-from dcpython.app.integration.meetup import get_upcoming_events, get_past_events
+from dcpython.app.integration.meetup import get_upcoming_events
+from dcpython.app.integration.meetup import get_past_events
 
 
 class Venue(models.Model):

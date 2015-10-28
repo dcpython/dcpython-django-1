@@ -1,8 +1,6 @@
 from django.contrib import admin
 from dcpython.blog.models import Post
-from django.utils.translation import ugettext_lazy as _
 from pagedown.widgets import AdminPagedownWidget
-from django.db import models
 from markupfield.fields import MarkupField
 from django.utils import six
 

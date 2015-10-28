@@ -5,8 +5,12 @@ github:
 heroku:
 	git push heroku master
 
-lint:
+lint: yapf flake
+
+yapf:
 	yapf -i dcpython/*.py
 	yapf -i dcpython/*/*.py
-#	flake8 dcpython/*.py
-#	flake8 dcpython/*/*.py
+
+flake:
+	flake8 dcpython/*.py
+	flake8 dcpython/*/*.py

@@ -2,7 +2,9 @@
 
 from dcpython.events.models import Event
 from django.shortcuts import render
-from django.views.generic.dates import YearArchiveView, MonthArchiveView, DateDetailView
+from django.views.generic.dates import YearArchiveView
+from django.views.generic.dates import MonthArchiveView
+from django.views.generic.dates import DateDetailView
 
 
 def event_list(request):

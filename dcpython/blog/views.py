@@ -2,9 +2,10 @@
 
 from dcpython.blog.models import Post
 from django.shortcuts import render
-from django.views.generic.dates import YearArchiveView, MonthArchiveView, DateDetailView
+from django.views.generic.dates import YearArchiveView
+from django.views.generic.dates import MonthArchiveView
+from django.views.generic.dates import DateDetailView
 import datetime
-from django.utils.timezone import get_current_timezone
 
 
 def blog(request):
@@ -34,7 +35,6 @@ class PostDetail(DateDetailView):
     month_format = '%m'
 
     def get_object(self, queryset=None):
-        tz = get_current_timezone()
         qs = queryset if queryset is not None else self.get_queryset()
         day_start = datetime.datetime(
             int(self.kwargs['year']), int(self.kwargs['month']),

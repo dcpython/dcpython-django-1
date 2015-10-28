@@ -4,6 +4,8 @@ from django.contrib.admin import SimpleListFilter
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Q
 
+qs_filter = (Q(reviewed=False) | Q(donations__reviewed=False))
+
 
 class NeedsReview(SimpleListFilter):
     title = _("Level")
@@ -15,8 +17,7 @@ class NeedsReview(SimpleListFilter):
 
     def queryset(self, request, queryset):
         if self.value() == "N":
-            return queryset.filter(Q(reviewed=False) | Q(donations__reviewed=
-                                                         False))
+            return queryset.filter(qs_filter)
 
         if self.value() == "NN":
             return queryset.filter(reviewed=True, donations__reviewed=True)
