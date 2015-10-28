@@ -1,22 +1,16 @@
-{% extends "app/base.html" %}
-{% load bootstrap3 %}
+{% extends "app/home.html" %}
 
-{% block title %}Donate{% endblock %}
-
-{% block breadcrumbs %}
-    <li class="active">Donate</li>
-{% endblock breadcrumbs %}
+{% load staticfiles %}
 
 {% block javascript %}
     {{ block.super }}
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    <script src="{{ STATIC_URL }}js/stripe-integration.js"></script>
+    <script src="{% static 'js/stripe-integration.js' %}"></script>
     <script type="text/javascript">
       // This identifies your website in the createToken call below
       Stripe.setPublishableKey("{{ stripe_public }}");
       // ...
     </script>
-
 {% endblock javascript %}
 
 {% block stylesheets %}
@@ -148,8 +142,6 @@
       <div class="col-lg-4" id="master_donate_div">
         <form id="master_donate_form" role="form">
           {% csrf_token %}
-          {% bootstrap_form donation_form %}
-          {% bootstrap_form donor_form %}
           <hr />
           <p>All information entered here is private. You can add public information on the next page.</p>
           <hr />

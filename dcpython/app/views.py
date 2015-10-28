@@ -1,8 +1,12 @@
 from django.shortcuts import render
 
 
-def aws(request):
+def andrew_w_singer(request):
     return render(request, 'app/andrew-w-singer.html')
+
+
+def donate(request):
+    return render(request, 'app/donate.html')
 
 
 def home(request):
