@@ -127,3 +127,7 @@ strong a:hover {
 .andrew_w_singer {
     margin-right: 15px;
 }
+
+.navbar-nav a {
+    height: 65px; 
+}
