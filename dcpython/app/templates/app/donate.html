@@ -5,20 +5,12 @@
 {% block content %}
   <div class="container">
     <div class="row">
-      <div class="col-lg-12">
-        <div class="page-header">
-            <h1>Donate</h1>
-            <h3>Please donate to <a href="/about">support our mission</a> &mdash; Learn more about <a href="/andrew-w-singer.html">Andrew W. Singer</a></h3>
-        </div>
-      </div>
-    </div>
-    <div class="row">
       <div class="col-lg-4">
         <div class="row">
           <div class="col-lg-12">
             <div class="donor_lvl aws">
-              <h1><a href="/andrew-w-singer.html">Andrew W. Singer</a> Memorial Level</h1>
-              <h2>$2500</h2>
+              <h1><a href="{% url 'andrew_w_singer' %}">Andrew W. Singer</a> Memorial Level</h1>
+              <h2>$2,500</h2>
             </div>
           </div>
         </div>
@@ -26,28 +18,28 @@
           <div class="col-lg-6">
             <div class="donor_lvl platinum">
               <h1>Platinum</h1>
-              <h2>$1000+</h2>
+              <h2>$1,000</h2>
             </div>
 
             <div class="donor_lvl gold">
               <h1>Gold</h1>
-              <h2>$500+</h2>
+              <h2>$500</h2>
             </div>
 
             <div class="donor_lvl silver">
               <h1>Silver</h1>
-              <h2>$250+</h2>
+              <h2>$250</h2>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="donor_lvl bronze">
               <h1>Bronze</h1>
-              <h2>$100+</h2>
+              <h2>$100</h2>
             </div>
 
             <div class="donor_lvl individual">
               <h1>Individual</h1>
-              <h2>$50+</h2>
+              <h2>$50</h2>
             </div>
 
             <div class="donor_lvl other">
@@ -136,35 +128,6 @@
         </form>
         <small>Donations processed via <a href="http://stripe.com">Stripe</a>.</small>
       </div>
-    </div>    <div class="row">
-        <div class="col-lg-12">
-
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="page-header">
-            <h1>Donors</h1>
-        </div>
-      </div>
-    </div>
-    {% for level_name, donors in all_donors.items %}
-    {% if donors %}
-    <div class="row">
-      <div class="col-lg-12">
-        <h2>{{ level_name }}</h2>
-      </div>
-    </div>
-    <div class="row">
-    {% for donor in donors %}
-      <div class="col-lg-4">
-        {% include "support/donor_acknowledgement.html" %}
-      </div>
-    {% if forloop.counter|divisibleby:3 %}
-    </div>
-  </br>
-    <div class="row">
-    {% endif %}
-    {% endfor %}
-    </div>
-  {% endif %}
-  {% endfor %}
-  {% endblock %}
+    </div>    
+  </div>    
+{% endblock %}
