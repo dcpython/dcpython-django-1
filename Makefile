@@ -11,11 +11,13 @@ flake:
 	flake8 dcpython/*.py
 	flake8 dcpython/*/*.py
 
-push: github heroku
+push:
+	git push
 
 github:
 	git commit -a -m "Update"
-	git push
 
 heroku:
 	git push heroku master
+
+publish: github push heroku
