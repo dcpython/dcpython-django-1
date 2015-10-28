@@ -96,6 +96,7 @@ STATIC_URL = '/static/'
 # DC Python
 
 MEETUP_API_KEY = os.getenv('MEETUP_API_KEY', '')
+STRIPE_PRIVATE = os.getenv('STRIPE_PRIVATE', '')
 
 # https://devcenter.heroku.com/articles/django-assets
 #
