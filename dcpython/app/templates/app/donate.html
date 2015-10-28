@@ -2,22 +2,6 @@
 
 {% load staticfiles %}
 
-{% block javascript %}
-    {{ block.super }}
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    <script src="{% static 'js/stripe-integration.js' %}"></script>
-    <script type="text/javascript">
-      // This identifies your website in the createToken call below
-      Stripe.setPublishableKey("{{ stripe_public }}");
-      // ...
-    </script>
-{% endblock javascript %}
-
-{% block stylesheets %}
-    {{ block.super }}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/support.css" type="text/css">
-{% endblock stylesheets %}
-
 {% block content %}
   <div class="container">
     <div class="row">

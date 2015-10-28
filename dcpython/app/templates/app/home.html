@@ -165,7 +165,12 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- Stripe -->
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script src="{% static 'js/stripe-integration.js' %}"></script>
+    <script type="text/javascript">
+        Stripe.setPublishableKey("{{ stripe_public }}");
+    </script>
+
   </body>
 </html>
