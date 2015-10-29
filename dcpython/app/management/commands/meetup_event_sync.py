@@ -6,13 +6,5 @@ class Command(BaseCommand):
     help = 'Synchronizes the local event database with Meetup.com'
 
     def handle(self, *args, **options):
-        try:
-            import bpdb as pdb
-        except ImportError:
-            import pdb
 
-        try:
-            Event.sync_from_meetup()
-        except Exception as exc:
-            self.stderr.write("ERROR: %s" % exc)
-            pdb.pm()
+        Event.sync_from_meetup()
