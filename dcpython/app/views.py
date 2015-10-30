@@ -13,6 +13,10 @@ import datetime
 stripe.api_key = settings.STRIPE_PRIVATE
 
 
+def about(request):
+    return render(request, 'app/about.html')
+
+
 def andrew_w_singer(request):
     return render(request, 'app/andrew-w-singer.html')
 

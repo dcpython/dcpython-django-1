@@ -44,6 +44,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
+            <li class="active"><a href="{% url 'about' %}">About</a></li>
             <li class="active"><a href="{% url 'donate' %}">Donate</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -62,7 +63,7 @@
 
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
-                    <h1>We promote and support the use of Python software in DC</h1>
+                    <h1>We <a href="{% url 'about' %}">promote and support</a> the use of Python software in DC</h1>
                 </div>
             </div>
 
