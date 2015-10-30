@@ -4,7 +4,7 @@ html, body{
 }
 
 .navbar .nav > li > a {
-    color:white;
+    color:black;
 }
 
 .navbar .nav > li > a:hover {
@@ -130,4 +130,6 @@ strong a:hover {
 
 .navbar-nav a {
     height: 65px; 
+    color: black;
+    border-bottom: 1px solid black;
 }
