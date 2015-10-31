@@ -17,8 +17,8 @@ from django.db.models import Q
 from django.utils.text import slugify
 from django.utils.timezone import now
 from django.utils import timezone
-from dcpython.app.integration.meetup import get_upcoming_events
-from dcpython.app.integration.meetup import get_past_events
+from .integration.meetup import get_upcoming_events
+from .integration.meetup import get_past_events
 import feedparser
 from django.conf import settings
 try:

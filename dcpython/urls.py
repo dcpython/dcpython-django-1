@@ -15,8 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-
-from dcpython.app import views
+from dcpython import views
 
 urlpatterns = [
     url(r'^$',

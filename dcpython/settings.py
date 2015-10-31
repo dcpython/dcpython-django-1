@@ -35,7 +35,7 @@ INSTALLED_APPS = ('django.contrib.admin',
                   'django.contrib.sessions',
                   'django.contrib.messages',
                   'django.contrib.staticfiles',
-                  'dcpython.app', )
+                  'dcpython.dcpython', )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
