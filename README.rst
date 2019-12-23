@@ -1,1 +1,2 @@
-Moved to https://github.com/DCPython/dcpython-website
+dcpython-django-1
+=================
